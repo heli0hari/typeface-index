@@ -1,0 +1,910 @@
+<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
+<title>Typeface Index</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Mulish:wght@400;500;600;700&family=Outfit:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: glass control bar over an aqua field + left filter rail + full-width specimen rows */
+:root{
+  --bg:hsl(196 64% 96%);
+  --bg-2:hsl(165 60% 94%);
+  --surface:hsl(0 0% 100% / .66);
+  --surface-2:hsl(0 0% 100% / .86);
+  --solid:hsl(0 0% 100%);
+  --fg:hsl(203 38% 15%);
+  --muted:hsl(202 16% 44%);
+  --line:hsl(196 40% 86% / .9);
+  --line-soft:hsl(196 40% 90% / .7);
+  --accent:hsl(193 94% 38%);
+  --accent-2:hsl(154 70% 42%);
+  --accent-soft:hsl(192 90% 94%);
+  --chip:hsl(196 50% 95% / .8);
+  --on-accent:hsl(0 0% 100%);
+  --gloss:hsl(0 0% 100% / .72);
+  --ring:hsl(193 90% 45% / .3);
+  --shadow:0 10px 30px -14px hsl(200 60% 28% / .45);
+  --shadow-sm:0 2px 10px -4px hsl(200 55% 30% / .3);
+  --blur:saturate(1.5) blur(16px);
+  --font-display:"Outfit","Mulish",system-ui,sans-serif;
+  --font-ui:"Mulish",system-ui,-apple-system,sans-serif;
+  --font-mono:"JetBrains Mono",ui-monospace,SFMono-Regular,Menlo,monospace;
+}
+:root[data-theme="dark"]{
+  --bg:hsl(203 48% 7%);
+  --bg-2:hsl(176 45% 9%);
+  --surface:hsl(199 40% 16% / .6);
+  --surface-2:hsl(199 38% 18% / .85);
+  --solid:hsl(201 40% 12%);
+  --fg:hsl(188 28% 92%);
+  --muted:hsl(195 14% 62%);
+  --line:hsl(196 28% 28% / .8);
+  --line-soft:hsl(196 26% 22% / .7);
+  --accent:hsl(186 92% 56%);
+  --accent-2:hsl(152 68% 54%);
+  --accent-soft:hsl(193 60% 17%);
+  --chip:hsl(199 32% 22% / .7);
+  --on-accent:hsl(200 60% 9%);
+  --gloss:hsl(190 60% 80% / .16);
+  --ring:hsl(186 90% 60% / .35);
+  --shadow:0 12px 34px -16px hsl(190 80% 4% / .9);
+  --shadow-sm:0 2px 12px -5px hsl(190 80% 3% / .8);
+  color-scheme:dark;
+}
+*{box-sizing:border-box}
+body{
+  background:
+    radial-gradient(1100px 620px at 8% -8%, hsl(188 90% 62% / .26), transparent 62%),
+    radial-gradient(900px 560px at 102% 4%, hsl(152 76% 56% / .22), transparent 60%),
+    radial-gradient(760px 500px at 50% 112%, hsl(205 92% 60% / .18), transparent 64%),
+    linear-gradient(168deg, var(--bg), var(--bg-2));
+  background-attachment:fixed;
+  color:var(--fg);font-family:var(--font-ui);font-size:15px;line-height:1.55;margin:0;
+  min-height:100%;
+}
+html,body{min-height:100%}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:40;
+  background:var(--surface-2);backdrop-filter:var(--blur);-webkit-backdrop-filter:var(--blur)}
+button,input,select,textarea{font:inherit;color:inherit}
+a{color:var(--accent)}
+
+.wrap{padding-left:max(18px,env(safe-area-inset-left,0px));padding-right:max(18px,env(safe-area-inset-right,0px));max-width:1400px;margin:0 auto}
+
+/* ---- glass surfaces ---- */
+.bar,.strip,.panel{
+  background:var(--surface);
+  backdrop-filter:var(--blur);-webkit-backdrop-filter:var(--blur);
+  border-bottom:1px solid var(--line);
+}
+.bar{position:sticky;top:env(safe-area-inset-top,0px);z-index:30;box-shadow:var(--shadow-sm)}
+.bar::after{content:"";position:absolute;inset:0 0 auto;height:1px;background:var(--gloss)}
+.bar-in{display:flex;align-items:center;gap:14px;padding-block:13px;flex-wrap:wrap}
+.brand{font-family:var(--font-display);font-weight:700;font-size:20px;letter-spacing:-.025em;white-space:nowrap;
+  background:linear-gradient(100deg,var(--accent),var(--accent-2));-webkit-background-clip:text;background-clip:text;color:transparent}
+.search{flex:1 1 220px;min-width:0;position:relative}
+.search input{width:100%;padding:10px 13px 10px 36px;border:1px solid var(--line);border-radius:999px;
+  background:var(--surface-2);box-shadow:inset 0 1px 2px hsl(200 40% 50% / .12)}
+.search input:focus{outline:none;border-color:var(--accent);box-shadow:0 0 0 4px var(--ring)}
+.search svg{position:absolute;left:13px;top:50%;transform:translateY(-50%);opacity:.55}
+.count{font-family:var(--font-mono);font-size:12px;color:var(--muted);font-variant-numeric:tabular-nums;white-space:nowrap}
+.iconbtn{background:var(--surface-2);border:1px solid var(--line);border-radius:999px;padding:8px 14px;cursor:pointer;
+  display:inline-flex;align-items:center;gap:7px;font-size:13px;font-weight:600;box-shadow:var(--shadow-sm);transition:.15s}
+.iconbtn:hover{border-color:var(--accent);color:var(--accent);transform:translateY(-1px)}
+
+/* ---- tabs ---- */
+.tabs{display:flex;gap:3px;background:var(--chip);padding:4px;border-radius:999px;border:1px solid var(--line)}
+.tab{border:none;background:none;padding:6px 15px;border-radius:999px;font-size:13px;font-weight:600;cursor:pointer;
+  color:var(--muted);white-space:nowrap;transition:.15s}
+.tab[aria-selected="true"]{background:linear-gradient(180deg,hsl(0 0% 100% / .35),transparent),linear-gradient(100deg,var(--accent),var(--accent-2));
+  color:var(--on-accent);box-shadow:var(--shadow-sm)}
+
+/* ---- preview strip ---- */
+.strip-in{display:flex;gap:18px;align-items:center;padding-block:12px;flex-wrap:wrap}
+.strip label{font-size:10.5px;text-transform:uppercase;letter-spacing:.1em;color:var(--muted);font-weight:700}
+.strip .f{display:flex;align-items:center;gap:9px;min-width:0}
+.strip input[type=text],.strip select,.rail select,.field input{
+  border:1px solid var(--line);border-radius:12px;padding:8px 12px;background:var(--surface-2);
+  box-shadow:inset 0 1px 2px hsl(200 40% 50% / .1)}
+.strip input[type=text]{width:min(320px,52vw);border-radius:999px}
+.strip select{border-radius:999px;padding:7px 10px}
+input:focus-visible,select:focus-visible,textarea:focus-visible{outline:none;border-color:var(--accent);box-shadow:0 0 0 4px var(--ring)}
+input[type=range]{accent-color:var(--accent);width:124px}
+.sizeval{font-family:var(--font-mono);font-size:12px;color:var(--muted);width:44px;font-variant-numeric:tabular-nums}
+.tog{display:inline-flex;align-items:center;gap:7px;font-size:13px;cursor:pointer;user-select:none;font-weight:500}
+
+/* ---- body grid ---- */
+.cols{display:grid;grid-template-columns:244px minmax(0,1fr);gap:34px;padding-block:26px 72px;align-items:start}
+@media(max-width:860px){.cols{grid-template-columns:minmax(0,1fr);gap:0}}
+
+/* ---- filter rail ---- */
+.rail{position:sticky;top:calc(env(safe-area-inset-top,0px) + 124px);display:flex;flex-direction:column;gap:20px;
+  background:var(--surface);backdrop-filter:var(--blur);-webkit-backdrop-filter:var(--blur);
+  border:1px solid var(--line);border-radius:20px;padding:20px 18px;box-shadow:var(--shadow);
+  max-height:calc(100dvh - env(safe-area-inset-top,0px) - 150px);overflow-y:auto;overscroll-behavior:contain;
+  scrollbar-width:thin}
+.rail::-webkit-scrollbar{width:8px}
+.rail::-webkit-scrollbar-thumb{background:var(--line);border-radius:999px}
+@media(max-width:860px){
+  .rail{position:static;display:none;margin:18px 0;border-radius:20px;max-height:none;overflow:visible}
+  .rail.open{display:flex}
+}
+.grp{display:flex;flex-direction:column;gap:9px}
+.grp h3{margin:0;font-size:10.5px;text-transform:uppercase;letter-spacing:.11em;color:var(--muted);font-weight:700}
+.chips{display:flex;flex-wrap:wrap;gap:6px}
+.chip{border:1px solid var(--line);background:var(--surface-2);border-radius:999px;padding:5px 12px;font-size:13px;
+  cursor:pointer;transition:.15s;font-weight:500}
+.chip:hover{border-color:var(--accent);color:var(--accent)}
+.chip[aria-pressed="true"]{background:linear-gradient(180deg,hsl(0 0% 100% / .32),transparent),linear-gradient(100deg,var(--accent),var(--accent-2));
+  border-color:transparent;color:var(--on-accent);font-weight:600;box-shadow:var(--shadow-sm)}
+.rail select{width:100%}
+.checks{display:flex;flex-direction:column;gap:9px;font-size:14px}
+.checks label{display:flex;align-items:center;gap:9px;cursor:pointer}
+input[type=checkbox]{accent-color:var(--accent);width:16px;height:16px}
+.reset{align-self:flex-start;background:none;border:none;color:var(--accent);padding:0;font-size:13px;cursor:pointer;
+  text-decoration:underline;text-underline-offset:3px;font-weight:600}
+
+/* ---- panels ---- */
+.panel-in{padding-block:20px;display:flex;flex-direction:column;gap:13px}
+.btn{background:linear-gradient(180deg,hsl(0 0% 100% / .34),transparent),linear-gradient(100deg,var(--accent),var(--accent-2));
+  color:var(--on-accent);border:none;border-radius:999px;padding:11px 22px;font-weight:700;font-size:14px;cursor:pointer;
+  box-shadow:var(--shadow-sm);transition:.15s}
+.btn:hover:not(:disabled){transform:translateY(-1px);box-shadow:var(--shadow)}
+.btn:disabled{opacity:.45;cursor:default}
+.btn.ghost{background:var(--surface-2);color:var(--fg);border:1px solid var(--line);font-weight:600}
+.hint{font-size:12.5px;color:var(--muted);max-width:70ch;margin:0}
+.hint code{font-family:var(--font-mono);font-size:11.5px;background:var(--chip);padding:2px 6px;border-radius:6px}
+.status{font-size:13px;color:var(--muted);display:flex;align-items:center;gap:8px;min-height:20px}
+.err{color:hsl(356 72% 52%)}
+.localrow{display:flex;gap:11px;align-items:center;flex-wrap:wrap}
+.bar-count{font-family:var(--font-mono);font-size:12px;color:var(--muted)}
+
+/* ---- results ---- */
+.row{border:1px solid var(--line-soft);border-radius:18px;background:var(--surface);
+  backdrop-filter:var(--blur);-webkit-backdrop-filter:var(--blur);
+  padding:18px 20px 20px;display:flex;flex-direction:column;gap:10px;margin-bottom:12px;
+  box-shadow:var(--shadow-sm);transition:.18s}
+.row:hover{border-color:var(--accent);box-shadow:var(--shadow);transform:translateY(-1px)}
+.meta{display:flex;align-items:baseline;gap:10px;flex-wrap:wrap;min-width:0}
+.fname{font-weight:700;font-size:14px;letter-spacing:-.01em}
+.dot{color:var(--line);font-size:10px}
+.tag{font-family:var(--font-mono);font-size:11px;color:var(--muted);font-variant-numeric:tabular-nums}
+.badge{font-family:var(--font-mono);font-size:10px;letter-spacing:.05em;text-transform:uppercase;padding:3px 8px;
+  border-radius:999px;background:var(--accent-soft);color:var(--accent);font-weight:600}
+.badge.src{background:var(--chip);color:var(--muted)}
+.spec{font-size:44px;line-height:1.22;margin:0;overflow-wrap:anywhere;min-width:0;letter-spacing:-.015em;transition:opacity .2s}
+.spec.pending{opacity:.3}
+.get{margin-left:auto;font-size:13px;font-weight:600;text-decoration:none;white-space:nowrap;display:inline-flex;align-items:center;gap:5px}
+.get:hover{text-decoration:underline}
+.empty{padding:70px 0;text-align:center;color:var(--muted)}
+.empty strong{display:block;font-family:var(--font-display);font-size:20px;color:var(--fg);margin-bottom:6px}
+.note{font-size:12px;color:var(--muted);padding-top:18px;margin-top:10px;border-top:1px solid var(--line-soft)}
+.sentinel{height:40px}
+@media(max-width:600px){.spec{font-size:clamp(26px,8vw,40px)}.row{padding:16px}}
+@media(prefers-reduced-motion:reduce){*{transition:none!important}}
+:focus-visible{outline:2px solid var(--accent);outline-offset:2px;border-radius:6px}
+
+
+/* ---- per-row style control ---- */
+.noital{font-family:var(--font-mono);font-size:10px;letter-spacing:.04em;text-transform:uppercase;
+  color:var(--muted);padding:4px 9px;border-radius:999px;background:var(--chip);white-space:nowrap}
+.ibtn.faux[aria-pressed="true"]{background:var(--chip);color:var(--muted);border-color:var(--line)}
+.badge.warn{background:var(--chip);color:var(--muted)}
+.styler{display:flex;align-items:center;gap:5px;margin-left:auto;flex-wrap:wrap}
+.wsel{border:1px solid var(--line);border-radius:999px;padding:4px 9px;background:var(--surface-2);
+  font-family:var(--font-mono);font-size:11px;cursor:pointer}
+.wsel:hover{border-color:var(--accent)}
+.ibtn{border:1px solid var(--line);border-radius:999px;padding:4px 11px;background:var(--surface-2);
+  font-size:11.5px;font-style:italic;cursor:pointer;font-weight:600;transition:.15s}
+.ibtn:hover{border-color:var(--accent);color:var(--accent)}
+.ibtn[aria-pressed="true"]{background:linear-gradient(100deg,var(--accent),var(--accent-2));
+  border-color:transparent;color:var(--on-accent)}
+.ibtn:disabled{opacity:.35;cursor:default}
+.styler .get{margin-left:4px}
+
+</style>
+
+<header class="bar">
+  <div class="wrap bar-in">
+    <div class="brand">Typeface<span>&nbsp;Index</span></div>
+    <div class="search">
+      <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
+      <input id="q" type="search" placeholder="Search by name…" autocomplete="off">
+    </div>
+    <span class="count" id="count">—</span>
+    <div class="tabs" role="tablist">
+      <button class="tab" role="tab" data-tab="browse" aria-selected="true">Browse</button>
+      <button class="tab" role="tab" data-tab="local" aria-selected="false">My fonts</button>
+    </div>
+    <button class="iconbtn" id="filterToggle" aria-expanded="false">Filters</button>
+    <button class="iconbtn" id="themeBtn" title="Switch theme">Theme</button>
+  </div>
+</header>
+
+<div class="strip">
+  <div class="wrap strip-in">
+    <div class="f"><label for="ptext">Preview</label><input id="ptext" type="text" placeholder="Each script shown in its own language" autocomplete="off"></div>
+    <div class="f"><label for="psize">Size</label><input id="psize" type="range" min="16" max="110" value="44"><span class="sizeval" id="sizeval">44px</span></div>
+    <div class="f"><label for="pweight">Weight</label>
+      <select id="pweight">
+        <option value="100">100 Thin</option><option value="200">200 ExtraLight</option>
+        <option value="300">300 Light</option><option value="400" selected>400 Regular</option>
+        <option value="500">500 Medium</option><option value="600">600 SemiBold</option>
+        <option value="700">700 Bold</option><option value="800">800 ExtraBold</option>
+        <option value="900">900 Black</option>
+      </select>
+    </div>
+    <label class="tog"><input type="checkbox" id="pital"> Italic</label>
+    <label class="tog" id="fauxWrap" hidden><input type="checkbox" id="pfaux"> Slant the rest</label>
+    <span class="count" id="italInfo"></span>
+  </div>
+</div>
+
+<section class="panel" id="panelLocal" hidden>
+  <div class="wrap panel-in">
+    <div class="localrow">
+      <button class="btn" id="pickDir">Connect a font folder</button>
+      <button class="btn ghost" id="forgetDir" hidden>Disconnect</button>
+      <input type="file" id="dirInput" webkitdirectory directory multiple hidden>
+      <input type="file" id="fileInput" accept=".ttf,.otf,.woff,.woff2,.ttc" multiple hidden>
+      <button class="btn ghost" id="pickFiles">Or pick files</button>
+      <span class="bar-count" id="localCount"></span>
+    </div>
+    <p class="hint" id="localHint"></p>
+  </div>
+</section>
+
+
+<main class="wrap cols">
+  <aside class="rail" id="rail">
+    <div class="grp">
+      <h3>Source</h3>
+      <div class="chips" id="fSource">
+        <button class="chip" data-v="google" aria-pressed="false">Google Fonts</button>
+        <button class="chip" data-v="curated" aria-pressed="false">Curated free</button>
+        <button class="chip" data-v="local" aria-pressed="false">On my disk</button>
+      </div>
+    </div>
+    <div class="grp">
+      <h3>Category</h3>
+      <div class="chips" id="fCat">
+        <button class="chip" data-v="sans-serif" aria-pressed="false">Sans</button>
+        <button class="chip" data-v="serif" aria-pressed="false">Serif</button>
+        <button class="chip" data-v="display" aria-pressed="false">Display</button>
+        <button class="chip" data-v="handwriting" aria-pressed="false">Handwriting</button>
+        <button class="chip" data-v="monospace" aria-pressed="false">Mono</button>
+      </div>
+    </div>
+    <div class="grp">
+      <h3>Language / script</h3>
+      <select id="fScript"></select>
+    </div>
+    <div class="grp">
+      <h3>Styles available</h3>
+      <select id="fStyles">
+        <option value="0">Any number of styles</option>
+        <option value="2">2 or more</option>
+        <option value="5">5 or more</option>
+        <option value="10">10 or more</option>
+      </select>
+    </div>
+    <div class="grp">
+      <h3>Weights</h3>
+      <select id="fWeight">
+        <option value="0">Any weight</option>
+        <option value="100">Has Thin 100</option>
+        <option value="300">Has Light 300</option>
+        <option value="500">Has Medium 500</option>
+        <option value="700">Has Bold 700</option>
+        <option value="900">Has Black 900</option>
+      </select>
+    </div>
+    <div class="grp">
+      <h3>Features</h3>
+      <div class="checks">
+        <label><input type="checkbox" id="fItalic"> True italic included</label>
+        <label><input type="checkbox" id="fVar"> Variable font</label>
+      </div>
+      <select id="fAxis">
+        <option value="">Any variable axis</option>
+        <option value="wght">Weight (wght)</option>
+        <option value="wdth">Width (wdth)</option>
+        <option value="slnt">Slant (slnt)</option>
+        <option value="ital">Italic (ital)</option>
+        <option value="opsz">Optical size (opsz)</option>
+        <option value="GRAD">Grade (GRAD)</option>
+      </select>
+    </div>
+    <div class="grp">
+      <h3>Sort</h3>
+      <select id="fSort">
+        <option value="az">A → Z</option>
+        <option value="new">Recently updated</option>
+        <option value="styles">Most styles</option>
+      </select>
+    </div>
+    <button class="reset" id="reset">Clear all filters</button>
+  </aside>
+
+  <section>
+    <div id="list"></div>
+    <div class="sentinel" id="sentinel"></div>
+    <p class="note" id="note"></p>
+  </section>
+</main>
+
+<script>
+const SCRIPTS=[
+ ["Common",[["latin","Latin"],["latin-ext","Latin Extended"],["cyrillic","Cyrillic"],["cyrillic-ext","Cyrillic Extended"],["greek","Greek"],["greek-ext","Greek Extended"],["vietnamese","Vietnamese"]]],
+ ["Indic",[["devanagari","Devanagari (Hindi, Marathi)"],["bengali","Bengali"],["tamil","Tamil"],["telugu","Telugu"],["kannada","Kannada"],["malayalam","Malayalam"],["gujarati","Gujarati"],["gurmukhi","Gurmukhi (Punjabi)"],["oriya","Odia"],["sinhala","Sinhala"]]],
+ ["East & Southeast Asia",[["japanese","Japanese"],["korean","Korean"],["chinese-simplified","Chinese (Simplified)"],["chinese-traditional","Chinese (Traditional)"],["chinese-hongkong","Chinese (Hong Kong)"],["thai","Thai"],["khmer","Khmer"],["lao","Lao"],["myanmar","Myanmar"]]],
+ ["Middle East & Africa",[["arabic","Arabic"],["hebrew","Hebrew"],["ethiopic","Ethiopic"],["armenian","Armenian"],["georgian","Georgian"],["adlam","Adlam"],["nko","N'Ko"],["tifinagh","Tifinagh"],["syriac","Syriac"],["thaana","Thaana"]]],
+ ["Other",[["math","Math symbols"],["symbols","Symbols"],["emoji","Emoji"],["braille","Braille"],["canadian-aboriginal","Canadian Aboriginal"],["cherokee","Cherokee"],["runic","Runic"],["tibetan","Tibetan"],["mongolian","Mongolian"],["javanese","Javanese"],["balinese","Balinese"]]]
+];
+const CATNAME={"sans-serif":"Sans","serif":"Serif","display":"Display","handwriting":"Handwriting","monospace":"Mono"};
+const SCRIPTNAME={};SCRIPTS.forEach(g=>g[1].forEach(p=>SCRIPTNAME[p[0]]=p[1]));
+
+const state={q:"",source:new Set(),cat:new Set(),script:"",styles:0,weight:0,italic:false,vari:false,axis:"",sort:"az",
+             text:"",size:44,pw:400,pi:false,faux:false};
+let FONTS=[],view=[],shown=0;
+const CHUNK=40;
+const list=document.getElementById('list');
+
+/* ---------- font loading ---------- */
+const loaded=new Set();let queue=new Set(),flushT=null;
+function wantFont(fam,w,ital){
+  const key=fam+"|"+w+"|"+(ital?1:0);
+  if(loaded.has(key))return true;
+  queue.add(key);
+  if(!flushT)flushT=setTimeout(flush,90);
+  return false;
+}
+function flush(){
+  flushT=null;
+  const batch=[...queue].slice(0,14);batch.forEach(k=>queue.delete(k));
+  if(!batch.length)return;
+  const parts=batch.map(k=>{
+    const [fam,w,it]=k.split("|");
+    const n=fam.replace(/ /g,"+");
+    return it==="1"?`family=${n}:ital,wght@1,${w}`:`family=${n}:wght@${w}`;
+  });
+  const link=document.createElement('link');
+  link.rel="stylesheet";
+  link.href="https://fonts.googleapis.com/css2?"+parts.join("&")+"&display=swap";
+  link.onload=()=>{batch.forEach(k=>{loaded.add(k);
+    document.querySelectorAll(`[data-key="${CSS.escape(k)}"]`).forEach(e=>e.classList.remove('pending'));});};
+  link.onerror=()=>batch.forEach(k=>{loaded.add(k);
+    document.querySelectorAll(`[data-key="${CSS.escape(k)}"]`).forEach(e=>e.classList.remove('pending'));});
+  document.head.appendChild(link);
+  if(queue.size)flushT=setTimeout(flush,120);
+}
+function nearest(ws,target){
+  if(!ws||!ws.length)return 400;
+  return ws.reduce((a,b)=>Math.abs(b-target)<Math.abs(a-target)?b:a);
+}
+
+/* A line of real text per script, so a Tamil face is previewed in Tamil.
+   Mostly the opening of the Universal Declaration of Human Rights, which is
+   the one sentence reliably translated into all of these. */
+const SAMPLES={
+  latin:"Whereas disregard and contempt",
+  "latin-ext":"Příliš žluťoučký kůň úpěl ďábelské ódy",
+  vietnamese:"Tất cả mọi người sinh ra đều tự do",
+  cyrillic:"Все люди рождаются свободными",
+  "cyrillic-ext":"Все люди рождаються вільними",
+  greek:"Όλοι οι άνθρωποι γεννιούνται ελεύθεροι",
+  "greek-ext":"Όλοι οι άνθρωποι γεννιούνται ελεύθεροι",
+  devanagari:"सभी मनुष्य स्वतंत्र पैदा होते हैं",
+  bengali:"সকল মানুষ স্বাধীনভাবে জন্মগ্রহণ করে",
+  tamil:"மனிதர்கள் அனைவரும் சுதந்திரமாகப் பிறக்கின்றனர்",
+  telugu:"ప్రతి మానవుడు స్వతంత్రుడుగా పుడతాడు",
+  kannada:"ಎಲ್ಲಾ ಮಾನವರು ಸ್ವತಂತ್ರರಾಗಿ ಜನಿಸಿದ್ದಾರೆ",
+  malayalam:"എല്ലാ മനുഷ്യരും സ്വതന്ത്രരായി ജനിക്കുന്നു",
+  gujarati:"પ્રતિષ્ઠા અને અધિકારોની દૃષ્ટિએ સમાન",
+  gurmukhi:"ਸਾਰੇ ਮਨੁੱਖ ਆਜ਼ਾਦ ਜੰਮਦੇ ਹਨ",
+  oriya:"ସମସ୍ତ ମଣିଷ ସ୍ୱାଧୀନ ଭାବରେ ଜନ୍ମଗ୍ରହଣ କରନ୍ତି",
+  sinhala:"සියලු මනුෂ්‍යයෝ නිදහස්ව උපත ලබති",
+  arabic:"يولد جميع الناس أحراراً متساوين",
+  hebrew:"כל בני האדם נולדו בני חורין",
+  syriac:"ܟܠܗܘܢ ܒܢܝ̈ܢܫܐ ܐܬܝܠܕܘ ܒܪ̈ܐ",
+  thaana:"ހުރިހާ އިންސާނުން ދުނިޔެއަށް އުފަންވަނީ",
+  thai:"มนุษย์ทั้งหลายเกิดมาอิสระ",
+  lao:"ມະນຸດທຸກຄົນເກີດມາມີອິດສະຫຼະ",
+  khmer:"មនុស្សទាំងអស់កើតមកមានសេរីភាព",
+  myanmar:"လူတိုင်းသည် လွတ်လပ်စွာ မွေးဖွားကြသည်",
+  japanese:"すべての人間は生まれながらに自由である",
+  korean:"모든 인간은 자유롭게 태어난다",
+  "chinese-simplified":"人人生而自由，在尊严和权利上一律平等",
+  "chinese-traditional":"人人生而自由，在尊嚴和權利上一律平等",
+  "chinese-hongkong":"人人生而自由，在尊嚴和權利上一律平等",
+  armenian:"Բոլոր մարդիկ ծնվում են ազատ",
+  georgian:"ყველა ადამიანი იბადება თავისუფალი",
+  ethiopic:"የሰው ልጅ ሁሉ ነፃ ሆኖ ይወለዳል",
+  cherokee:"ᏂᎦᏓ ᎠᏂᏴᏫ ᏂᎨᎫᏓᎸᎾ ᎠᎴ ᎤᏂᏠᏯᏍᏗ",
+  tibetan:"འགྲོ་བ་མིའི་རིགས་རྒྱུད་ཡོངས་ལ་",
+  mongolian:"ᠬᠦᠮᠦᠨ ᠪᠦᠬᠦᠨ ᠲᠥᠷᠥᠵᠦ",
+  adlam:"𞤊𞤮𞤼𞤮𞤲𞥋𞤣𞤭𞤪𞤫 𞤻𞤢𞤱𞤲𞤣𞤫",
+  nko:"ߡߐ߰ ߓߍ߯ ߦߋ߫ ߡߏߦߌ߫ ߟߊ߫ ߘߍ߲ߛߍ߲ߧߊ ߘߐ߫",
+  tifinagh:"ⴰⴽⴽⵯ ⵉⵎⴷⴰⵏⴻⵏ ⵜⵜⵍⴰⵍⴻⵏ ⴷ ⵉⵍⴻⵍⵍⵉⵜⴻⵏ",
+  javanese:"ꦱꦧꦼꦤ꧀ꦲꦸꦮꦺꦴꦁꦏꦭꦲꦶꦂꦫꦏꦺꦩꦂꦝꦶꦏ",
+  balinese:"ᬲᬫᬶᬫᬦᬸᬲᬦᬾᬓᬾᬫ᭄ᬩᬮᬶᬫᬃᬤᬶᬓ",
+  math:"∑ ∫ √ ≠ ≤ ∞ ∂ π ∇ ⊕ ℝ",
+  symbols:"★ ☀ ☂ ✈ ⌘ ⏱ ⚑ ✓ ✶ ❖",
+  symbols2:"★ ☀ ☂ ✈ ⌘ ⏱ ⚑ ✓ ✶ ❖",
+  music:"𝄞 𝄫 𝄪 ♩ ♪ ♫ ♬ ♭ ♮ ♯",
+  emoji:"😀 🌙 🌿 🎧 ⚡ 🫶 🎈 🛠"
+};
+/* Non-Latin first: a family covering Tamil and Latin is more usefully shown in Tamil. */
+const SAMPLE_ORDER=["japanese","korean","chinese-simplified","chinese-traditional","chinese-hongkong",
+  "devanagari","bengali","tamil","telugu","kannada","malayalam","gujarati","gurmukhi","oriya","sinhala",
+  "arabic","hebrew","syriac","thaana","thai","lao","khmer","myanmar","tibetan","mongolian",
+  "armenian","georgian","ethiopic","cherokee","adlam","nko","tifinagh","javanese","balinese",
+  "emoji","music","symbols","symbols2","math","cyrillic","greek","latin"];
+function sampleFor(f){
+  // A filtered script is what you asked to see, so it beats the non-Latin default.
+  if(state.script&&f.s.includes(state.script)&&SAMPLES[state.script])return SAMPLES[state.script];
+  for(const s of SAMPLE_ORDER)if(f.s.includes(s)&&SAMPLES[s])return SAMPLES[s];
+  return SAMPLES.latin;
+}
+const RTL=["arabic","hebrew","syriac","thaana","nko","adlam"];
+function isRTL(f){
+  if(state.text)return false;
+  if(state.script)return RTL.includes(state.script);
+  return RTL.some(x=>f.s.includes(x));
+}
+
+/* ---------- filtering ---------- */
+function apply(){
+  const q=state.q.toLowerCase().trim();
+  view=FONTS.filter(f=>{
+    if(q&&!f.n.toLowerCase().includes(q))return false;
+    if(state.source.size&&!state.source.has(f.src))return false;
+    if(state.cat.size&&!state.cat.has(f.c))return false;
+    if(state.script&&!f.s.includes(state.script))return false;
+    if(state.italic&&!f.i)return false;
+    if(state.vari&&!(f.v&&f.v.length))return false;
+    if(state.axis&&!(f.v||[]).includes(state.axis))return false;
+    if(state.styles){ if(!f.w)return false; if(f.w.length*(f.i?2:1)<state.styles)return false; }
+    if(state.weight){ if(!f.w)return false;
+      if(f.v&&f.v.includes("wght")){ if(state.weight<Math.min(...f.w)||state.weight>Math.max(...f.w))return false; }
+      else if(!f.w.includes(state.weight))return false; }
+    return true;
+  });
+  if(state.sort==="az")view.sort((a,b)=>a.n.localeCompare(b.n));
+  if(state.sort==="new")view.sort((a,b)=>(b.d||"").localeCompare(a.d||"")||a.n.localeCompare(b.n));
+  if(state.sort==="styles")view.sort((a,b)=>((b.w?b.w.length*(b.i?2:1):0)-(a.w?a.w.length*(a.i?2:1):0))||a.n.localeCompare(b.n));
+  list.innerHTML="";shown=0;
+  document.getElementById('count').textContent=view.length.toLocaleString()+" / "+FONTS.length.toLocaleString();
+  italInfo();
+  if(!view.length){
+    list.innerHTML='<div class="empty"><strong>Nothing matches those filters</strong>Try widening the script or clearing a feature filter.</div>';
+    return;
+  }
+  more();
+}
+function italInfo(){
+  const el=document.getElementById('italInfo');
+  if(!state.pi||!view.length){el.textContent="";return;}
+  const n=view.filter(f=>f.i).length;
+  el.textContent=n===view.length?"all have a true italic"
+    :`${n} of ${view.length} have a true italic`+(state.faux?" · rest slanted":"");
+}
+function more(){
+  const slice=view.slice(shown,shown+CHUNK);
+  if(!slice.length)return;
+  const frag=document.createDocumentFragment();
+  slice.forEach(f=>frag.appendChild(card(f)));
+  list.appendChild(frag);shown+=slice.length;
+}
+function card(f){
+  const el=document.createElement('article');el.className="row";
+  const scripts=f.s.filter(s=>SCRIPTNAME[s]).map(s=>SCRIPTNAME[s].replace(/ \(.*/,""));
+  const extra=f.s.length-scripts.length;
+  const meta=document.createElement('div');meta.className="meta";
+  const styles=f.w?f.w.length*(f.i?2:1):null;
+  meta.innerHTML=
+    `<span class="fname">${esc(f.n)}</span>`+
+    `<span class="tag">${CATNAME[f.c]||f.c}</span><span class="dot">●</span>`+
+    (styles?`<span class="tag">${styles} ${styles===1?"style":"styles"}</span><span class="dot">●</span>`:
+             `<span class="tag">styles on foundry site</span><span class="dot">●</span>`)+
+    `<span class="tag">${scripts.slice(0,3).join(", ")||"—"}${extra>0?" +"+extra:""}</span>`+
+    (f.v&&f.v.length?`<span class="badge">VF ${f.v.filter(a=>a!=="ital").slice(0,3).join(" ")}</span>`:"")+
+    (f.i?`<span class="badge">italic</span>`:"")+
+    (f.src==="curated"?`<span class="badge src">${esc(f.foundry)}</span>`:"")+
+    (f.src==="local"?`<span class="badge src">on disk</span>`:"")+
+    "";
+  const tail=document.createElement('div');tail.className="styler";
+  if(f.src==="local"){
+    const s=document.createElement('span');s.className="tag";s.textContent=f.file;tail.appendChild(s);
+  }else{
+    const a=document.createElement('a');a.className="get";a.target="_blank";a.rel="noopener";
+    a.href=f.src==="curated"?f.url:"https://fonts.google.com/specimen/"+f.n.replace(/ /g,"+");
+    a.textContent="Download ↗";
+    tail.appendChild(a);
+  }
+  meta.appendChild(tail);
+
+  const p=document.createElement('p');p.className="spec";
+  if(isRTL(f))p.dir="rtl";
+  p.textContent=state.text||sampleFor(f);
+  p.style.fontSize=state.size+"px";
+  if(f.src==="curated"){
+    p.style.fontFamily='var(--font-display)';
+    p.style.opacity=".6";
+    p.title="Preview not available here — this font is hosted by "+f.foundry;
+  }else{
+    paint(f,p);
+  }
+  el.append(meta,p);
+  if(f.src!=="curated")tail.prepend(styler(f,p));
+  return el;
+}
+/* each row can override the global weight and italic while you look at it */
+const rowStyle=new Map();
+function weightsFor(f){
+  if(f.v&&f.v.includes("wght")&&f.w.length){
+    const lo=Math.min(...f.w),hi=Math.max(...f.w);
+    return [100,200,300,400,500,600,700,800,900].filter(w=>w>=lo&&w<=hi);
+  }
+  return f.w||[400];
+}
+const WNAME={100:"Thin",200:"ExtraLight",300:"Light",400:"Regular",500:"Medium",
+             600:"SemiBold",700:"Bold",800:"ExtraBold",900:"Black"};
+function styleOf(f){
+  const o=rowStyle.get(f.id)||{};
+  const ws=weightsFor(f);
+  const w=o.w!==undefined?o.w:(f.v&&f.v.includes("wght")
+      ? Math.min(Math.max(state.pw,Math.min(...f.w)),Math.max(...f.w))
+      : nearest(f.w,state.pw));
+  const want=o.i!==undefined?o.i:state.pi;
+  const real=want&&!!f.i;
+  const faux=want&&!f.i&&state.faux;
+  return {w:ws.includes(w)?w:nearest(ws,w),i:real,faux,want,ws};
+}
+function styler(f,p){
+  const box=document.createElement('div');box.className="styler";
+  const st=styleOf(f),{w,i,ws}=st;
+  const sel=document.createElement('select');sel.className="wsel";sel.title="Weight";
+  ws.forEach(v=>{
+    const o=document.createElement('option');o.value=v;o.textContent=v+" "+(WNAME[v]||"");
+    if(v===w)o.selected=true;sel.appendChild(o);
+  });
+  sel.addEventListener('change',()=>{
+    const cur=styleOf(f);rowStyle.set(f.id,{w:+sel.value,i:cur.i});paint(f,p);
+  });
+  if(!f.i&&!state.faux){
+    const tag=document.createElement('span');tag.className="noital";tag.textContent="no italic";
+    tag.title="This family ships no italic cut. Turn on \u201cSlant the rest\u201d above to preview a synthetic one.";
+    box.append(sel,tag);
+    return box;
+  }
+  const ib=document.createElement('button');ib.className="ibtn"+(f.i?"":" faux");
+  ib.textContent=f.i?"Italic":"Slant";
+  ib.setAttribute('aria-pressed',String(st.want));
+  ib.title=f.i?"Show the italic cut":"Synthetic slant — this family has no real italic";
+  ib.addEventListener('click',()=>{
+    const cur=styleOf(f),next=!cur.want;
+    rowStyle.set(f.id,{w:cur.w,i:next});
+    ib.setAttribute('aria-pressed',String(next));paint(f,p);
+  });
+  box.append(sel,ib);
+  return box;
+}
+function paint(f,p){
+  const {w,i,faux}=styleOf(f);
+  const slant=faux?"oblique 11deg":(i?"italic":"normal");
+  if(f.src==="local"){
+    p.style.fontFamily=`"${f.fam}", var(--font-ui)`;
+    p.style.fontWeight=w;p.style.fontStyle=slant;
+    return;
+  }
+  p.dataset.key=f.n+"|"+w+"|"+(i?1:0);
+  p.style.fontFamily=`"${f.n}", var(--font-ui)`;
+  p.style.fontWeight=w;p.style.fontStyle=slant;
+  p.title=faux?"Synthetic slant — this family has no real italic":"";
+  p.classList.toggle('pending',!wantFont(f.n,w,i));
+}
+const esc=s=>String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+
+/* ---------- wiring ---------- */
+function chipGroup(id,set){
+  document.getElementById(id).addEventListener('click',e=>{
+    const b=e.target.closest('.chip');if(!b)return;
+    const on=b.getAttribute('aria-pressed')==="true";
+    b.setAttribute('aria-pressed',String(!on));
+    on?set.delete(b.dataset.v):set.add(b.dataset.v);
+    apply();
+  });
+}
+chipGroup('fSource',state.source);chipGroup('fCat',state.cat);
+
+const sel=document.getElementById('fScript');
+sel.innerHTML='<option value="">All languages & scripts</option>'+
+  SCRIPTS.map(g=>`<optgroup label="${g[0]}">`+g[1].map(p=>`<option value="${p[0]}">${p[1]}</option>`).join("")+`</optgroup>`).join("");
+
+const on=(id,ev,fn)=>document.getElementById(id).addEventListener(ev,fn);
+on('q','input',e=>{state.q=e.target.value;apply()});
+on('fScript','change',e=>{state.script=e.target.value;apply()});
+on('fStyles','change',e=>{state.styles=+e.target.value;apply()});
+on('fWeight','change',e=>{state.weight=+e.target.value;apply()});
+on('fAxis','change',e=>{state.axis=e.target.value;apply()});
+on('fItalic','change',e=>{state.italic=e.target.checked;apply()});
+on('fVar','change',e=>{state.vari=e.target.checked;apply()});
+on('fSort','change',e=>{state.sort=e.target.value;apply()});
+on('ptext','input',e=>{state.text=e.target.value;apply()});
+on('psize','input',e=>{state.size=+e.target.value;document.getElementById('sizeval').textContent=state.size+"px";
+  document.querySelectorAll('.spec').forEach(s=>s.style.fontSize=state.size+"px")});
+on('pweight','change',e=>{state.pw=+e.target.value;rowStyle.clear();apply()});
+on('pital','change',e=>{
+  state.pi=e.target.checked;
+  document.getElementById('fauxWrap').hidden=!state.pi;
+  rowStyle.clear();apply();
+});
+on('pfaux','change',e=>{state.faux=e.target.checked;rowStyle.clear();apply()});
+on('filterToggle','click',e=>{const r=document.getElementById('rail');
+  const o=r.classList.toggle('open');e.target.setAttribute('aria-expanded',String(o))});
+on('themeBtn','click',()=>{
+  const dark=document.documentElement.getAttribute('data-theme')==="dark";
+  document.documentElement.setAttribute('data-theme',dark?"light":"dark");
+  try{localStorage.setItem('tiTheme',dark?"light":"dark")}catch(_){}
+});
+on('reset','click',()=>{
+  state.q="";state.source.clear();state.cat.clear();state.script="";state.styles=0;state.weight=0;
+  state.italic=false;state.vari=false;state.axis="";state.sort="az";
+  document.querySelectorAll('.chip').forEach(c=>c.setAttribute('aria-pressed','false'));
+  ['q','fScript','fStyles','fWeight','fAxis','fSort'].forEach(i=>document.getElementById(i).value=i==='fSort'?'az':(i==='fStyles'||i==='fWeight'?'0':''));
+  document.getElementById('fItalic').checked=false;document.getElementById('fVar').checked=false;
+  apply();
+});
+/* the page opens light for everyone; the toggle is the only way into dark */
+document.documentElement.setAttribute('data-theme','light');
+try{const t=localStorage.getItem('tiTheme');if(t)document.documentElement.setAttribute('data-theme',t)}catch(_){}
+
+new IntersectionObserver(es=>{if(es[0].isIntersecting)more()},{rootMargin:"600px"})
+  .observe(document.getElementById('sentinel'));
+
+/* ================= tabs ================= */
+let tab="browse";
+function showTab(name){
+  const prev=tab;tab=name;
+  document.querySelectorAll('.tab').forEach(t=>t.setAttribute('aria-selected',String(t.dataset.tab===name)));
+  document.getElementById('panelLocal').hidden=name!=="local";
+  if(name==="local")renderLocalHint();
+}
+document.querySelector('.tabs').addEventListener('click',e=>{
+  const b=e.target.closest('.tab');if(b)showTab(b.dataset.tab);
+});
+
+/* ================= local folder ================= */
+const SCRIPT_PROBE=[["latin",0x41],["latin-ext",0x0100],["vietnamese",0x01A0],["cyrillic",0x0410],["greek",0x0391],
+ ["arabic",0x0627],["hebrew",0x05D0],["devanagari",0x0905],["bengali",0x0985],["tamil",0x0B85],["telugu",0x0C05],
+ ["kannada",0x0C85],["malayalam",0x0D05],["gujarati",0x0A85],["gurmukhi",0x0A05],["oriya",0x0B05],["sinhala",0x0D85],
+ ["thai",0x0E01],["lao",0x0E81],["khmer",0x1780],["myanmar",0x1000],["japanese",0x3042],["korean",0xAC00],
+ ["chinese-simplified",0x4E00],["armenian",0x0531],["georgian",0x10D0],["ethiopic",0x1200]];
+let dirHandle=null,localFonts=[];
+
+function idb(){return new Promise((res,rej)=>{const r=indexedDB.open('tiStore',1);
+  r.onupgradeneeded=()=>r.result.createObjectStore('kv');r.onsuccess=()=>res(r.result);r.onerror=()=>rej(r.error)});}
+async function idbSet(k,v){const d=await idb();return new Promise(r=>{const t=d.transaction('kv','readwrite');t.objectStore('kv').put(v,k);t.oncomplete=r});}
+async function idbGet(k){const d=await idb();return new Promise(r=>{const t=d.transaction('kv','readonly');const q=t.objectStore('kv').get(k);q.onsuccess=()=>r(q.result);q.onerror=()=>r(null)});}
+
+const HAS_FSA=!!window.showDirectoryPicker;
+function renderLocalHint(){
+  const h=document.getElementById('localHint');
+  const common="Reads <code>.ttf</code>, <code>.otf</code>, <code>.woff</code>, <code>.woff2</code> and <code>.ttc</code> files, subfolders included, and pulls the family name, weights, italics, variable axes and script coverage straight out of each file. Nothing is uploaded — everything is read inside your browser. You can also drag a folder or a pile of font files anywhere onto this page.";
+  h.innerHTML=HAS_FSA
+    ? "Point this at the folder where you keep downloaded typefaces. "+common+" The folder stays connected between visits; your browser will ask you to confirm access once per session."
+    : common+" This browser reloads the folder each visit rather than remembering it, so reconnect when you come back.";
+}
+async function connectDir(handle){
+  dirHandle=handle;
+  const files=[];
+  async function walk(dir,depth){
+    if(depth>4)return;
+    for await(const e of dir.values()){
+      if(e.kind==="file"&&/\.(ttf|otf|woff2?|ttc)$/i.test(e.name))files.push(e);
+      else if(e.kind==="directory")await walk(e,depth+1);
+    }
+  }
+  const cnt=document.getElementById('localCount');
+  cnt.textContent="Scanning…";
+  try{await walk(handle,0);}catch(err){cnt.textContent="";document.getElementById('localHint').innerHTML='<span class="err">Could not read that folder: '+esc(err.message)+'</span>';return;}
+  const resolved=[];
+  for(const fh of files){try{resolved.push(await fh.getFile())}catch(_){}}
+  await ingest(resolved);
+  try{await idbSet('dir',handle)}catch(_){}
+}
+async function ingest(fileList){
+  const files=[...fileList].filter(f=>/\.(ttf|otf|woff2?|ttc)$/i.test(f.name));
+  const cnt=document.getElementById('localCount');
+  if(!files.length){cnt.textContent="No font files found there";return;}
+  localFonts=[];
+  let done=0;
+  for(const file of files){
+    try{
+      const buf=await file.arrayBuffer();
+      const info=parseFont(buf,file.name);
+      const fam="loc-"+info.family.replace(/[^a-z0-9]/gi,"");
+      const ff=new FontFace(fam,buf,{weight:String(info.weight),style:info.italic?"italic":"normal"});
+      await ff.load();document.fonts.add(ff);
+      localFonts.push({n:info.family,id:fam,fam,src:"local",c:info.cat,s:info.scripts,w:[info.weight],
+        i:info.italic,v:info.axes,d:"",file:file.name});
+    }catch(_){ }
+    done++;
+    if(done%12===0)cnt.textContent=`Reading ${done} / ${files.length}…`;
+  }
+  mergeLocal();
+  cnt.textContent=`${localFonts.length} font file${localFonts.length===1?"":"s"} loaded`;
+  document.getElementById('forgetDir').hidden=false;
+}
+function mergeLocal(){
+  // collapse files of one family into a single entry
+  const by=new Map();
+  localFonts.forEach(f=>{
+    const k=f.n.toLowerCase();
+    if(!by.has(k))by.set(k,{...f,w:[],i:false,files:0});
+    const e=by.get(k);
+    if(!e.w.includes(f.w[0]))e.w.push(f.w[0]);
+    e.i=e.i||f.i;e.files++;e.fam=f.fam;
+    f.s.forEach(s=>{if(!e.s.includes(s))e.s.push(s)});
+  });
+  const merged=[...by.values()].map(e=>({...e,w:e.w.sort((a,b)=>a-b),file:e.files+" file"+(e.files>1?"s":"")}));
+  FONTS=FONTS.filter(f=>f.src!=="local").concat(merged);
+  apply();
+}
+on('pickDir','click',async()=>{
+  if(HAS_FSA){
+    try{const h=await showDirectoryPicker({mode:"read"});await connectDir(h);return;}
+    catch(err){if(err&&err.name==="AbortError")return;}
+  }
+  document.getElementById('dirInput').click();
+});
+on('pickFiles','click',()=>document.getElementById('fileInput').click());
+on('dirInput','change',e=>{if(e.target.files.length)ingest(e.target.files)});
+on('fileInput','change',e=>{if(e.target.files.length)ingest(e.target.files)});
+
+/* drag and drop works everywhere, folders included on Chromium */
+document.addEventListener('dragover',e=>{e.preventDefault()});
+document.addEventListener('drop',async e=>{
+  e.preventDefault();
+  const img=[...(e.dataTransfer.files||[])].find(f=>f.type.startsWith('image/'));
+  const out=[];
+  const items=[...(e.dataTransfer.items||[])];
+  const entries=items.map(i=>i.webkitGetAsEntry&&i.webkitGetAsEntry()).filter(Boolean);
+  if(entries.length){
+    const readDir=d=>new Promise(r=>d.createReader().readEntries(r));
+    const walkEntry=async(en,depth)=>{
+      if(en.isFile)return new Promise(r=>en.file(f=>{out.push(f);r()},()=>r()));
+      if(en.isDirectory&&depth<4){
+        for(const c of await readDir(en))await walkEntry(c,depth+1);
+      }
+    };
+    for(const en of entries)await walkEntry(en,0);
+  }else{
+    out.push(...(e.dataTransfer.files||[]));
+  }
+  if(out.length){
+    showTab('local');
+    ingest(out);
+  }
+});
+on('forgetDir','click',async()=>{
+  dirHandle=null;localFonts=[];FONTS=FONTS.filter(f=>f.src!=="local");
+  try{await idbSet('dir',null)}catch(_){}
+  document.getElementById('localCount').textContent="";
+  document.getElementById('forgetDir').hidden=true;apply();
+});
+async function restoreDir(){
+  if(!window.showDirectoryPicker)return;
+  try{
+    const h=await idbGet('dir');if(!h)return;
+    const perm=await h.queryPermission({mode:"read"});
+    document.getElementById('forgetDir').hidden=false;
+    if(perm==="granted")return connectDir(h);
+    document.getElementById('localCount').textContent="Folder remembered — click Connect to allow access again";
+    document.getElementById('pickDir').textContent="Reconnect folder";
+    document.getElementById('pickDir').onclick=async()=>{
+      if(await h.requestPermission({mode:"read"})==="granted")connectDir(h);
+    };
+  }catch(_){}
+}
+
+/* ---- minimal sfnt parser: name / OS2 / fvar / cmap ---- */
+function parseFont(buf,filename){
+  const base={family:filename.replace(/\.[^.]+$/,"").replace(/[-_]/g," "),
+              weight:guessWeight(filename),italic:/italic|oblique/i.test(filename),
+              axes:[],scripts:["latin"],cat:"sans-serif"};
+  try{
+    const dv=new DataView(buf);
+    const tag=dv.getUint32(0);
+    if(tag===0x774F4632||tag===0x774F4646)return base; // woff2/woff: compressed, filename only
+    const num=dv.getUint16(4);const t={};
+    for(let i=0;i<num;i++){const o=12+i*16;
+      const name=String.fromCharCode(dv.getUint8(o),dv.getUint8(o+1),dv.getUint8(o+2),dv.getUint8(o+3));
+      t[name]={off:dv.getUint32(o+8),len:dv.getUint32(o+12)};}
+    if(t.name){
+      const n=readNames(dv,t.name.off);
+      base.family=n[16]||n[1]||base.family;
+      const sub=n[17]||n[2]||"";
+      if(/italic|oblique/i.test(sub))base.italic=true;
+    }
+    if(t['OS/2']){
+      const o=t['OS/2'].off;
+      base.weight=dv.getUint16(o+4)||base.weight;
+      if(dv.getUint16(o+62)&1)base.italic=true;
+      const cls=dv.getUint8(o+30);
+      base.cat=cls===10?"handwriting":cls===12?"display":"sans-serif";
+      if(cls>=1&&cls<=7)base.cat="serif";
+      if(t.post&&dv.getUint32(t.post.off+16)===0)base.cat=base.cat; // isFixedPitch below
+      if(t.post&&dv.getUint32(t.post.off+16)!==0)base.cat="monospace";
+    }
+    if(t.fvar){
+      const o=t.fvar.off,ao=o+dv.getUint16(o+4),ac=dv.getUint16(o+8),as=dv.getUint16(o+10);
+      for(let i=0;i<ac;i++){const p=ao+i*as;
+        base.axes.push(String.fromCharCode(dv.getUint8(p),dv.getUint8(p+1),dv.getUint8(p+2),dv.getUint8(p+3)));}
+    }
+    if(t.cmap){
+      const ranges=readCmap(dv,t.cmap.off);
+      if(ranges.length){
+        const has=cp=>ranges.some(r=>cp>=r[0]&&cp<=r[1]);
+        const found=SCRIPT_PROBE.filter(([,cp])=>has(cp)).map(([s])=>s);
+        if(found.length)base.scripts=found;
+      }
+    }
+  }catch(_){}
+  return base;
+}
+function guessWeight(s){
+  const m=s.match(/\b(100|200|300|400|500|600|700|800|900)\b/);if(m)return +m[1];
+  const map=[[/thin|hairline/i,100],[/extra ?light|ultra ?light/i,200],[/light/i,300],[/regular|book|normal/i,400],
+    [/medium/i,500],[/semi ?bold|demi ?bold/i,600],[/extra ?bold|ultra ?bold/i,800],[/black|heavy/i,900],[/bold/i,700]];
+  for(const [re,w] of map)if(re.test(s))return w;
+  return 400;
+}
+function readNames(dv,off){
+  const out={},count=dv.getUint16(off+2),strOff=off+dv.getUint16(off+4);
+  for(let i=0;i<count;i++){
+    const r=off+6+i*12,pid=dv.getUint16(r),nid=dv.getUint16(r+6),
+          len=dv.getUint16(r+8),o=strOff+dv.getUint16(r+10);
+    if(out[nid])continue;
+    let s="";
+    if(pid===3){for(let j=0;j<len;j+=2)s+=String.fromCharCode(dv.getUint16(o+j));}
+    else{for(let j=0;j<len;j++)s+=String.fromCharCode(dv.getUint8(o+j));}
+    if(s.trim())out[nid]=s.trim();
+  }
+  return out;
+}
+function readCmap(dv,off){
+  const n=dv.getUint16(off+2);let best=0;
+  for(let i=0;i<n;i++){const r=off+4+i*8,pid=dv.getUint16(r),eid=dv.getUint16(r+2),o=off+dv.getUint32(r+4);
+    if(pid===3&&(eid===1||eid===10))best=o;else if(!best&&pid===0)best=o;}
+  if(!best)return [];
+  const fmt=dv.getUint16(best),out=[];
+  if(fmt===4){
+    const segX2=dv.getUint16(best+6),endO=best+14,startO=endO+segX2+2;
+    for(let i=0;i<segX2/2;i++){
+      const end=dv.getUint16(endO+i*2),start=dv.getUint16(startO+i*2);
+      if(start<=end&&end!==0xFFFF)out.push([start,end]);
+    }
+  }else if(fmt===12){
+    const groups=dv.getUint32(best+12);
+    for(let i=0;i<Math.min(groups,6000);i++){const g=best+16+i*12;
+      out.push([dv.getUint32(g),dv.getUint32(g+4)]);}
+  }
+  return out;
+}
+restoreDir();renderLocalHint();
+
+/* ---------- data ---------- */
+Promise.all([fetch('fonts.json').then(r=>r.json()),fetch('curated.json').then(r=>r.json())])
+.then(([g,c])=>{
+  g.forEach(f=>f.src="google");
+  c.forEach(f=>{f.src="curated";f.w=null;f.d="";});
+  FONTS=g.concat(c);
+  document.getElementById('note').textContent=
+    `${g.length.toLocaleString()} families from Google Fonts (metadata snapshot, last updated ${g.map(f=>f.d).sort().pop()}) plus ${c.length} curated free families from independent foundries. Curated entries link out to their foundry and are not previewed here.`;
+  apply();
+})
+.catch(()=>{list.innerHTML='<div class="empty"><strong>Font data did not load</strong>fonts.json and curated.json need to sit next to this page.</div>';});
+</script>
+
+</body></html>
