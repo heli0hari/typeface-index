@@ -1,10 +1,24 @@
-<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<style>
+:root{color-scheme:light}
+html,body{margin:0}
+img{max-width:100%}
+[hidden]{display:none!important}
+</style>
 <title>Typeface Index</title>
 <meta name="claude:viewport-fit-sides" content="cover">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Mulish:wght@400;500;600;700&family=Outfit:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap">
 <style>
+/* The hidden attribute must beat the layout rules below, or a panel switched
+   off by a tab still paints. Explicit here so the page behaves the same when
+   it is served as a plain file. */
+[hidden]{display:none!important}
 /* Layout: glass control bar over an aqua field + left filter rail + full-width specimen rows */
 :root{
   --bg:hsl(196 64% 96%);
@@ -184,6 +198,64 @@ input[type=checkbox]{accent-color:var(--accent);width:16px;height:16px}
 :focus-visible{outline:2px solid var(--accent);outline-offset:2px;border-radius:6px}
 
 
+/* ---- moodboard ---- */
+.boardbar{display:flex;gap:10px;align-items:center;flex-wrap:wrap;padding-block:12px}
+.boardbar .sep{width:1px;height:24px;background:var(--line)}
+.mini{border:1px solid var(--line);border-radius:999px;background:var(--surface-2);padding:6px 12px;
+  font-size:12.5px;font-weight:600;cursor:pointer;display:inline-flex;align-items:center;gap:6px;transition:.15s}
+.mini:hover{border-color:var(--accent);color:var(--accent)}
+.mini[aria-pressed="true"]{background:linear-gradient(100deg,var(--accent),var(--accent-2));
+  border-color:transparent;color:var(--on-accent)}
+.mini:disabled{opacity:.4;cursor:default}
+#boardMain>section{min-width:0}
+#boardRail{min-width:0}
+.canvaswrap{border:1px solid var(--line);border-radius:20px;overflow:auto;box-shadow:var(--shadow);
+  height:min(74vh,820px);background:var(--board-bg);position:relative;overscroll-behavior:contain}
+.canvas{position:relative;width:2200px;height:1500px;
+  background-image:radial-gradient(var(--board-dot) 1px,transparent 1px);background-size:28px 28px}
+:root{--board-bg:hsl(0 0% 100%);--board-dot:hsl(200 24% 88%);--board-ink:hsl(222 28% 12%)}
+:root[data-theme="dark"]{--board-bg:hsl(201 40% 12%);--board-dot:hsl(200 20% 26%);--board-ink:hsl(188 28% 92%)}
+.canvaswrap[data-ground="dark"]{--board-bg:hsl(220 30% 11%);--board-dot:hsl(220 16% 26%);--board-ink:hsl(0 0% 100%)}
+.canvaswrap[data-ground="light"]{--board-bg:hsl(40 30% 97%);--board-dot:hsl(40 16% 86%);--board-ink:hsl(30 20% 12%)}
+.blk{position:absolute;padding:6px 8px;border-radius:8px;cursor:grab;color:var(--board-ink);
+  border:1.5px solid transparent;min-width:40px;line-height:1.2;white-space:pre-wrap;overflow-wrap:break-word}
+.blk:hover{border-color:hsl(193 90% 50% / .4)}
+.blk.sel{border-color:var(--accent);cursor:grab}
+.blk.editing{cursor:text;border-style:dashed;background:hsl(193 90% 50% / .06)}
+.blk.drag{cursor:grabbing;opacity:.9}
+.blk .txt{outline:none;min-height:1em}
+.blk .txt:focus{outline:none}
+.fontpick{display:flex;align-items:center;gap:6px}
+.fontpick input{width:140px}
+.fontpick select{width:200px;font-size:13px}
+.setbtn{border:1px solid var(--line);border-radius:999px;background:var(--surface-2);padding:6px 12px;
+  font-size:12.5px;font-weight:600;cursor:pointer}
+.setbtn:hover{border-color:var(--accent);color:var(--accent)}
+.blk .hnd{position:absolute;right:-5px;top:50%;transform:translateY(-50%);width:10px;height:28px;
+  border-radius:4px;background:var(--accent);opacity:0;cursor:ew-resize}
+.blk.sel .hnd{opacity:1}
+.blk .lbl{position:absolute;left:0;top:-19px;font-family:var(--font-mono);font-size:10px;
+  color:var(--accent);white-space:nowrap;opacity:0;pointer-events:none}
+.blk.sel .lbl{opacity:1}
+.inspector{display:flex;gap:9px;align-items:center;flex-wrap:wrap;padding:13px 15px;border:1px solid var(--line);
+  border-radius:16px;background:var(--surface);backdrop-filter:var(--blur);-webkit-backdrop-filter:var(--blur);
+  box-shadow:var(--shadow-sm);margin-bottom:12px}
+.inspector label{font-size:10px;text-transform:uppercase;letter-spacing:.09em;color:var(--muted);font-weight:700}
+.inspector .f{display:flex;align-items:center;gap:7px}
+.inspector input[type=text],.inspector input[type=number],.inspector select{
+  border:1px solid var(--line);border-radius:9px;padding:6px 10px;background:var(--surface-2);font-size:13px}
+.inspector input[type=text]{width:190px}
+.inspector input[type=number]{width:68px;font-family:var(--font-mono)}
+.inspector input[type=color]{width:34px;height:30px;padding:2px;border:1px solid var(--line);border-radius:8px;
+  background:var(--surface-2);cursor:pointer}
+.boardempty{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;
+  gap:8px;text-align:center;color:var(--muted);pointer-events:none;padding:24px}
+.boardempty strong{font-family:var(--font-display);font-size:19px;color:var(--board-ink)}
+.addbtn{border:1px solid var(--line);border-radius:999px;background:var(--surface-2);padding:4px 11px;
+  font-size:11.5px;font-weight:600;cursor:pointer;transition:.15s;white-space:nowrap}
+.addbtn:hover{border-color:var(--accent);color:var(--accent)}
+.addbtn.on{background:linear-gradient(100deg,var(--accent),var(--accent-2));border-color:transparent;color:var(--on-accent)}
+
 /* ---- per-row style control ---- */
 .noital{font-family:var(--font-mono);font-size:10px;letter-spacing:.04em;text-transform:uppercase;
   color:var(--muted);padding:4px 9px;border-radius:999px;background:var(--chip);white-space:nowrap}
@@ -213,6 +285,7 @@ input[type=checkbox]{accent-color:var(--accent);width:16px;height:16px}
     <span class="count" id="count">—</span>
     <div class="tabs" role="tablist">
       <button class="tab" role="tab" data-tab="browse" aria-selected="true">Browse</button>
+      <button class="tab" role="tab" data-tab="board" aria-selected="false">Moodboard</button>
       <button class="tab" role="tab" data-tab="local" aria-selected="false">My fonts</button>
     </div>
     <button class="iconbtn" id="filterToggle" aria-expanded="false">Filters</button>
@@ -254,25 +327,97 @@ input[type=checkbox]{accent-color:var(--accent);width:16px;height:16px}
 </section>
 
 
-<main class="wrap cols">
+<section class="panel" id="panelBoard" hidden>
+  <div class="wrap boardbar">
+    <button class="btn" id="bAdd">Add text</button>
+    <button class="mini" id="bDup">Duplicate</button>
+    <button class="mini" id="bCompare" title="Copy this text below in another font">Compare below</button>
+    <button class="mini" id="bSet" title="Add a heading, subhead and body block to assign fonts to">Add a set</button>
+    <button class="mini" id="bDel">Delete</button>
+    <span class="sep"></span>
+    <label class="inspector-lbl" style="font-size:10px;text-transform:uppercase;letter-spacing:.09em;color:var(--muted);font-weight:700">Ground</label>
+    <button class="mini" data-ground="auto" aria-pressed="true">Auto</button>
+    <button class="mini" data-ground="light" aria-pressed="false">Light</button>
+    <button class="mini" data-ground="dark" aria-pressed="false">Dark</button>
+    <span class="sep"></span>
+    <button class="mini" id="bClear">Clear board</button>
+    <span class="bar-count" id="bCount"></span>
+  </div>
+</section>
+
+<main class="wrap cols" id="boardMain" hidden>
+  <div id="boardRail"></div>
+  <section>
+  <div class="inspector" id="insp">
+    <div class="f"><label for="iFont">Font</label>
+      <span class="fontpick">
+        <input id="iFontQ" type="text" placeholder="filter…" autocomplete="off">
+        <select id="iFont"></select>
+      </span></div>
+    <span class="count" id="pickCount"></span>
+    <div class="f"><label for="iSize">Size</label><input id="iSize" type="number" min="6" max="400" step="1"></div>
+    <div class="f"><label for="iWeight">Weight</label><select id="iWeight"></select></div>
+    <label class="tog"><input type="checkbox" id="iItal"> Italic</label>
+    <div class="f"><label for="iLS">Tracking</label><input id="iLS" type="number" min="-20" max="60" step="1"></div>
+    <div class="f"><label for="iLH">Leading</label><input id="iLH" type="number" min="0.6" max="3" step="0.05"></div>
+    <div class="f"><label for="iAlign">Align</label>
+      <select id="iAlign"><option value="left">Left</option><option value="center">Center</option><option value="right">Right</option></select></div>
+    <div class="f"><label for="iColor">Colour</label><input id="iColor" type="color"></div>
+  </div>
+  <div class="canvaswrap" id="canvasWrap" data-ground="auto">
+    <div class="canvas" id="canvas">
+      <div class="boardempty" id="boardEmpty">
+        <strong>An empty board</strong>
+        <span>Press <b>Add text</b>, or use <b>+ Board</b> on any font while browsing.<br>Drag to move, double-click to edit, drag the right handle to set the measure.</span>
+      </div>
+    </div>
+  </div>
+  <p class="note" id="boardNote">Boards are kept in this browser only — they are not uploaded, and they will not appear on another device.</p>
+  </section>
+</main>
+
+<main class="wrap cols" id="browseMain">
   <aside class="rail" id="rail">
     <div class="grp">
       <h3>Source</h3>
-      <div class="chips" id="fSource">
-        <button class="chip" data-v="google" aria-pressed="false">Google Fonts</button>
-        <button class="chip" data-v="curated" aria-pressed="false">Curated free</button>
-        <button class="chip" data-v="local" aria-pressed="false">On my disk</button>
-      </div>
+      <select id="fSource">
+        <option value="">All sources</option>
+        <option value="google">Google Fonts</option>
+        <option value="curated">Curated free</option>
+        <option value="local">On my disk</option>
+      </select>
     </div>
     <div class="grp">
       <h3>Category</h3>
-      <div class="chips" id="fCat">
-        <button class="chip" data-v="sans-serif" aria-pressed="false">Sans</button>
-        <button class="chip" data-v="serif" aria-pressed="false">Serif</button>
-        <button class="chip" data-v="display" aria-pressed="false">Display</button>
-        <button class="chip" data-v="handwriting" aria-pressed="false">Handwriting</button>
-        <button class="chip" data-v="monospace" aria-pressed="false">Mono</button>
-      </div>
+      <select id="fCat">
+        <option value="">All categories</option>
+        <option value="sans-serif">Sans serif</option>
+        <option value="serif">Serif</option>
+        <option value="display">Display</option>
+        <option value="handwriting">Handwriting</option>
+        <option value="monospace">Monospace</option>
+      </select>
+    </div>
+    <div class="grp">
+      <h3>Style</h3>
+      <select id="fTag">
+        <option value="">Any style</option>
+        <option value="script">Script &amp; cursive</option>
+        <option value="marker">Brush &amp; marker</option>
+        <option value="comic">Comic &amp; playful</option>
+        <option value="rounded">Rounded</option>
+        <option value="slab">Slab serif</option>
+        <option value="serif-old-style">Old style serif</option>
+        <option value="serif-didone">High contrast serif</option>
+        <option value="condensed">Condensed &amp; extended</option>
+        <option value="blackletter">Blackletter</option>
+        <option value="stencil">Stencil</option>
+        <option value="pixel">Pixel &amp; bitmap</option>
+        <option value="outline">Outline &amp; shadow</option>
+        <option value="display-decorative">Decorative</option>
+        <option value="mono">Monospace</option>
+      </select>
+      <span class="hint" id="tagNote" style="font-size:11.5px"></span>
     </div>
     <div class="grp">
       <h3>Language / script</h3>
@@ -340,10 +485,14 @@ const SCRIPTS=[
  ["Middle East & Africa",[["arabic","Arabic"],["hebrew","Hebrew"],["ethiopic","Ethiopic"],["armenian","Armenian"],["georgian","Georgian"],["adlam","Adlam"],["nko","N'Ko"],["tifinagh","Tifinagh"],["syriac","Syriac"],["thaana","Thaana"]]],
  ["Other",[["math","Math symbols"],["symbols","Symbols"],["emoji","Emoji"],["braille","Braille"],["canadian-aboriginal","Canadian Aboriginal"],["cherokee","Cherokee"],["runic","Runic"],["tibetan","Tibetan"],["mongolian","Mongolian"],["javanese","Javanese"],["balinese","Balinese"]]]
 ];
+const TAGNAME={slab:"slab serif",script:"script",marker:"brush",comic:"playful",
+  blackletter:"blackletter",stencil:"stencil",pixel:"pixel",rounded:"rounded",
+  condensed:"condensed",outline:"outline",mono:"mono","display-decorative":"decorative",
+  "serif-didone":"high contrast","serif-old-style":"old style"};
 const CATNAME={"sans-serif":"Sans","serif":"Serif","display":"Display","handwriting":"Handwriting","monospace":"Mono"};
 const SCRIPTNAME={};SCRIPTS.forEach(g=>g[1].forEach(p=>SCRIPTNAME[p[0]]=p[1]));
 
-const state={q:"",source:new Set(),cat:new Set(),script:"",styles:0,weight:0,italic:false,vari:false,axis:"",sort:"az",
+const state={q:"",source:"",cat:"",tag:"",script:"",styles:0,weight:0,italic:false,vari:false,axis:"",sort:"az",
              text:"",size:44,pw:400,pi:false,faux:false};
 let FONTS=[],view=[],shown=0;
 const CHUNK=40;
@@ -457,8 +606,9 @@ function apply(){
   const q=state.q.toLowerCase().trim();
   view=FONTS.filter(f=>{
     if(q&&!f.n.toLowerCase().includes(q))return false;
-    if(state.source.size&&!state.source.has(f.src))return false;
-    if(state.cat.size&&!state.cat.has(f.c))return false;
+    if(state.source&&f.src!==state.source)return false;
+    if(state.cat&&f.c!==state.cat)return false;
+    if(state.tag&&!(f.t||[]).includes(state.tag))return false;
     if(state.script&&!f.s.includes(state.script))return false;
     if(state.italic&&!f.i)return false;
     if(state.vari&&!(f.v&&f.v.length))return false;
@@ -475,6 +625,10 @@ function apply(){
   list.innerHTML="";shown=0;
   document.getElementById('count').textContent=view.length.toLocaleString()+" / "+FONTS.length.toLocaleString();
   italInfo();
+  if(typeof tab!=="undefined"&&tab==="board"&&typeof fillFontSelect==="function"){
+    fillFontSelect(document.getElementById('iFontQ').value);
+    const b=get(selId);if(b)document.getElementById('iFont').value=b.font;
+  }
   if(!view.length){
     list.innerHTML='<div class="empty"><strong>Nothing matches those filters</strong>Try widening the script or clearing a feature filter.</div>';
     return;
@@ -509,6 +663,7 @@ function card(f){
     `<span class="tag">${scripts.slice(0,3).join(", ")||"—"}${extra>0?" +"+extra:""}</span>`+
     (f.v&&f.v.length?`<span class="badge">VF ${f.v.filter(a=>a!=="ital").slice(0,3).join(" ")}</span>`:"")+
     (f.i?`<span class="badge">italic</span>`:"")+
+    ((f.t||[]).filter(t=>t!=="mono").slice(0,2).map(t=>`<span class="badge src">${TAGNAME[t]||t}</span>`).join(""))+
     (f.src==="curated"?`<span class="badge src">${esc(f.foundry)}</span>`:"")+
     (f.src==="local"?`<span class="badge src">on disk</span>`:"")+
     "";
@@ -520,6 +675,16 @@ function card(f){
     a.href=f.src==="curated"?f.url:"https://fonts.google.com/specimen/"+f.n.replace(/ /g,"+");
     a.textContent="Download ↗";
     tail.appendChild(a);
+  }
+  if(f.src!=="curated"){
+    const add=document.createElement('button');add.className="addbtn";add.textContent="+ Board";
+    add.title="Put this font on the moodboard";
+    add.addEventListener('click',()=>{
+      addBlock({font:f.n,text:state.text||sampleFor(f),weight:styleOf(f).w,italic:styleOf(f).i});
+      add.textContent="Added";add.classList.add('on');
+      setTimeout(()=>{add.textContent="+ Board";add.classList.remove('on')},900);
+    });
+    tail.appendChild(add);
   }
   meta.appendChild(tail);
 
@@ -606,16 +771,12 @@ function paint(f,p){
 const esc=s=>String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
 
 /* ---------- wiring ---------- */
-function chipGroup(id,set){
-  document.getElementById(id).addEventListener('click',e=>{
-    const b=e.target.closest('.chip');if(!b)return;
-    const on=b.getAttribute('aria-pressed')==="true";
-    b.setAttribute('aria-pressed',String(!on));
-    on?set.delete(b.dataset.v):set.add(b.dataset.v);
-    apply();
-  });
+function tagNote(){
+  const el=document.getElementById('tagNote');
+  el.textContent=state.tag
+    ? "Style groups are worked out from family names, so a few fonts that belong here may be missing."
+    : "";
 }
-chipGroup('fSource',state.source);chipGroup('fCat',state.cat);
 
 const sel=document.getElementById('fScript');
 sel.innerHTML='<option value="">All languages & scripts</option>'+
@@ -623,6 +784,9 @@ sel.innerHTML='<option value="">All languages & scripts</option>'+
 
 const on=(id,ev,fn)=>document.getElementById(id).addEventListener(ev,fn);
 on('q','input',e=>{state.q=e.target.value;apply()});
+on('fSource','change',e=>{state.source=e.target.value;apply()});
+on('fCat','change',e=>{state.cat=e.target.value;apply()});
+on('fTag','change',e=>{state.tag=e.target.value;tagNote();apply()});
 on('fScript','change',e=>{state.script=e.target.value;apply()});
 on('fStyles','change',e=>{state.styles=+e.target.value;apply()});
 on('fWeight','change',e=>{state.weight=+e.target.value;apply()});
@@ -648,10 +812,11 @@ on('themeBtn','click',()=>{
   try{localStorage.setItem('tiTheme',dark?"light":"dark")}catch(_){}
 });
 on('reset','click',()=>{
-  state.q="";state.source.clear();state.cat.clear();state.script="";state.styles=0;state.weight=0;
+  state.q="";state.source="";state.cat="";state.tag="";state.script="";state.styles=0;state.weight=0;
   state.italic=false;state.vari=false;state.axis="";state.sort="az";
-  document.querySelectorAll('.chip').forEach(c=>c.setAttribute('aria-pressed','false'));
-  ['q','fScript','fStyles','fWeight','fAxis','fSort'].forEach(i=>document.getElementById(i).value=i==='fSort'?'az':(i==='fStyles'||i==='fWeight'?'0':''));
+  ['q','fSource','fCat','fTag','fScript','fStyles','fWeight','fAxis','fSort'].forEach(i=>
+    document.getElementById(i).value=i==='fSort'?'az':(i==='fStyles'||i==='fWeight'?'0':''));
+  tagNote();
   document.getElementById('fItalic').checked=false;document.getElementById('fVar').checked=false;
   apply();
 });
@@ -668,11 +833,336 @@ function showTab(name){
   const prev=tab;tab=name;
   document.querySelectorAll('.tab').forEach(t=>t.setAttribute('aria-selected',String(t.dataset.tab===name)));
   document.getElementById('panelLocal').hidden=name!=="local";
+  document.getElementById('panelBoard').hidden=name!=="board";
+  document.getElementById('boardMain').hidden=name!=="board";
+  document.getElementById('browseMain').hidden=name==="board";
+  document.querySelector('.strip').hidden=name==="board";
+  const rail=document.getElementById('rail');
+  if(name==="board")document.getElementById('boardRail').appendChild(rail);
+  else document.getElementById('browseMain').prepend(rail);
   if(name==="local")renderLocalHint();
+  if(name==="board")boardShown();
 }
 document.querySelector('.tabs').addEventListener('click',e=>{
   const b=e.target.closest('.tab');if(b)showTab(b.dataset.tab);
 });
+
+
+/* ================= moodboard =================
+   A free-form canvas of text blocks. Each block carries its own font, size,
+   weight, italic, tracking, leading, colour and measure, so two typefaces can
+   be set side by side in the same words and compared honestly. */
+const BOARD_KEY="tiBoard";
+let blocks=[],selId=null,boardReady=false,bSeq=1;
+
+function loadBoard(){
+  try{
+    const raw=localStorage.getItem(BOARD_KEY);
+    if(raw){const d=JSON.parse(raw);if(Array.isArray(d.blocks))blocks=d.blocks;
+      if(d.ground)setGround(d.ground,true);}
+  }catch(_){}
+  blocks.forEach(b=>{bSeq=Math.max(bSeq,(+String(b.id).replace(/\D/g,"")||0)+1);});
+  if(blocks.length)document.querySelector('[data-tab="board"]').textContent="Moodboard ("+blocks.length+")";
+}
+function saveBoard(){
+  try{localStorage.setItem(BOARD_KEY,JSON.stringify({
+    blocks,ground:document.getElementById('canvasWrap').dataset.ground}));}catch(_){}
+}
+function defaults(){
+  return {size:56,weight:400,italic:false,ls:0,lh:1.2,align:"left",color:"",width:0};
+}
+function addBlock(opts){
+  const wrap=document.getElementById('canvasWrap');
+  const n=blocks.length;
+  const b=Object.assign({
+    id:"b"+(bSeq++),
+    x:60+(n%3)*70,
+    y:60+n*110,
+    text:"Typeface",
+    font:FONTS.length?FONTS[0].n:"Archivo"
+  },defaults(),opts||{});
+  // stack new blocks down the board rather than on top of each other
+  if(blocks.length){
+    const last=blocks[blocks.length-1];
+    b.x=last.x;b.y=last.y+Math.round(last.size*(last.lh||1.2))+42;
+  }
+  blocks.push(b);
+  if(tab==="board"){drawBlock(b);select(b.id);scrollTo(b);}
+  saveBoard();updateCount();
+  return b;
+}
+function removeBlock(id){
+  blocks=blocks.filter(b=>b.id!==id);
+  const el=document.getElementById(id);if(el)el.remove();
+  if(selId===id)select(null);
+  saveBoard();updateCount();
+}
+function get(id){return blocks.find(b=>b.id===id)||null;}
+
+function drawBlock(b){
+  let el=document.getElementById(b.id);
+  if(!el){
+    el=document.createElement('div');el.className="blk";el.id=b.id;
+    el.innerHTML='<span class="lbl"></span><div class="txt"></div><span class="hnd"></span>';
+    document.getElementById('canvas').appendChild(el);
+    wireBlock(el);
+  }
+  const txt=el.querySelector('.txt');
+  if(!el.classList.contains('editing'))txt.textContent=b.text;
+  el.style.left=b.x+"px";el.style.top=b.y+"px";
+  el.style.fontFamily=`"${b.font}", var(--font-ui)`;
+  el.style.fontSize=b.size+"px";
+  el.style.fontWeight=b.weight;
+  el.style.fontStyle=b.italic?"italic":"normal";
+  el.style.letterSpacing=(b.ls||0)/100+"em";
+  el.style.lineHeight=b.lh||1.2;
+  el.style.textAlign=b.align||"left";
+  el.style.color=b.color||"var(--board-ink)";
+  el.style.width=b.width?b.width+"px":"auto";
+  el.querySelector('.lbl').textContent=`${b.font} · ${b.weight}${b.italic?" italic":""} · ${b.size}px`;
+  const fam=FONTS.find(f=>f.n===b.font);
+  if(fam&&fam.src==="local")el.style.fontFamily=`"${fam.fam}", var(--font-ui)`;
+  else wantFont(b.font,b.weight,b.italic);
+  document.getElementById('boardEmpty').hidden=blocks.length>0;
+}
+function renderBoard(){
+  const c=document.getElementById('canvas');
+  [...c.querySelectorAll('.blk')].forEach(e=>e.remove());
+  blocks.forEach(drawBlock);
+  document.getElementById('boardEmpty').hidden=blocks.length>0;
+  updateCount();
+}
+function updateCount(){
+  const el=document.getElementById('bCount');
+  el.textContent=blocks.length?`${blocks.length} block${blocks.length>1?"s":""}`:"";
+  document.querySelector('[data-tab="board"]').textContent=blocks.length?"Moodboard ("+blocks.length+")":"Moodboard";
+  ['bDup','bDel','bCompare'].forEach(id=>document.getElementById(id).disabled=!selId);
+}
+function scrollTo(b){
+  const w=document.getElementById('canvasWrap');
+  const bottom=b.y+b.size*2;
+  if(bottom>w.scrollTop+w.clientHeight)w.scrollTo({top:bottom-w.clientHeight+80,behavior:"smooth"});
+}
+function select(id){
+  selId=id;
+  document.querySelectorAll('.blk').forEach(e=>e.classList.toggle('sel',e.id===id));
+  syncInspector();updateCount();
+}
+
+/* ---- dragging, editing, resizing ---- */
+function wireBlock(el){
+  const txt=el.querySelector('.txt');
+  let mode=null,armed=false,sx=0,sy=0,ox=0,oy=0,ow=0,pid=null;
+  el.addEventListener('pointerdown',e=>{
+    if(el.classList.contains('editing'))return;
+    const b=get(el.id);if(!b)return;
+    select(el.id);
+    mode=e.target.classList.contains('hnd')?"size":"move";
+    armed=false;pid=e.pointerId;
+    sx=e.clientX;sy=e.clientY;ox=b.x;oy=b.y;ow=b.width||el.offsetWidth;
+    e.preventDefault();
+  });
+  el.addEventListener('pointermove',e=>{
+    if(!mode||e.pointerId!==pid)return;
+    const dx=e.clientX-sx,dy=e.clientY-sy;
+    // a few pixels of slack, so a plain click or a double-click is not a drag
+    if(!armed){
+      if(Math.abs(dx)<3&&Math.abs(dy)<3)return;
+      armed=true;el.classList.add('drag');
+      try{el.setPointerCapture(pid)}catch(_){}
+    }
+    const b=get(el.id);if(!b)return;
+    if(mode==="move"){b.x=Math.max(0,ox+dx);b.y=Math.max(0,oy+dy);}
+    else{b.width=Math.max(60,Math.round(ow+dx));}
+    drawBlock(b);
+  });
+  const end=e=>{
+    if(!mode)return;
+    const was=armed;
+    mode=null;armed=false;el.classList.remove('drag');
+    try{el.releasePointerCapture(e.pointerId)}catch(_){}
+    if(was){saveBoard();syncInspector();}
+  };
+  el.addEventListener('pointerup',end);
+  el.addEventListener('pointercancel',end);
+
+  el.addEventListener('dblclick',e=>{
+    e.preventDefault();startEdit(el);
+  });
+  txt.addEventListener('blur',()=>{
+    if(!el.classList.contains('editing'))return;
+    const b=get(el.id);
+    el.classList.remove('editing');txt.contentEditable="false";
+    if(b){b.text=txt.textContent.replace(/\n+$/,"")||" ";saveBoard();drawBlock(b);}
+  });
+  txt.addEventListener('keydown',e=>{
+    e.stopPropagation();
+    if(e.key==="Escape"){e.preventDefault();txt.blur();}
+  });
+}
+function startEdit(el){
+  const txt=el.querySelector('.txt');
+  el.classList.add('editing');
+  txt.contentEditable="true";
+  txt.focus();
+  const r=document.createRange();r.selectNodeContents(txt);
+  const sel=window.getSelection();
+  if(sel){sel.removeAllRanges();sel.addRange(r);}
+}
+
+/* ---- inspector ---- */
+function syncInspector(){
+  const b=get(selId);
+  const ids=['iFont','iFontQ','iSize','iWeight','iItal','iLS','iLH','iAlign','iColor'];
+  ids.forEach(i=>document.getElementById(i).disabled=!b);
+  if(!b){document.getElementById('iFontQ').disabled=false;return;}
+  fillFontSelect(document.getElementById('iFontQ').value);
+  document.getElementById('iFont').value=b.font;
+  document.getElementById('iSize').value=b.size;
+  document.getElementById('iItal').checked=b.italic;
+  document.getElementById('iLS').value=b.ls||0;
+  document.getElementById('iLH').value=b.lh||1.2;
+  document.getElementById('iAlign').value=b.align||"left";
+  const ink=getComputedStyle(document.getElementById('canvas')).getPropertyValue('--board-ink').trim();
+  document.getElementById('iColor').value=b.color||hexOf(ink);
+  const f=FONTS.find(x=>x.n===b.font);
+  const sel=document.getElementById('iWeight');
+  const ws=f?weightsFor(f):[100,200,300,400,500,600,700,800,900];
+  sel.innerHTML=ws.map(w=>`<option value="${w}"${w===b.weight?" selected":""}>${w} ${WNAME[w]||""}</option>`).join("");
+  const it=document.getElementById('iItal');
+  it.disabled=!!(f&&!f.i);
+  it.title=f&&!f.i?"This family has no italic; the slant would be synthetic":"";
+}
+function hexOf(c){
+  try{
+    const d=document.createElement('canvas').getContext('2d');
+    d.fillStyle=c;return d.fillStyle;
+  }catch(_){return "#111111"}
+}
+function patch(fn){
+  const b=get(selId);if(!b)return;
+  fn(b);drawBlock(b);saveBoard();
+}
+/* The rail filters the picker too, so narrowing to serifs with a true italic
+   narrows what you can assign on the board. */
+function pickable(){
+  const pool=(view&&view.length)?view:FONTS;
+  return pool.filter(f=>f.src!=="curated");
+}
+function fillFontSelect(q){
+  const sel=document.getElementById('iFont');
+  const b=get(selId);
+  const term=(q||"").toLowerCase().trim();
+  let pool=pickable();
+  if(term)pool=pool.filter(f=>f.n.toLowerCase().includes(term));
+  // keep the block's own font in the list even when the filter excludes it
+  if(b&&!pool.some(f=>f.n===b.font)){
+    const own=FONTS.find(f=>f.n===b.font);
+    if(own)pool=[own].concat(pool);
+  }
+  sel.innerHTML=pool.slice(0,600).map(f=>
+    `<option value="${esc(f.n)}"${b&&f.n===b.font?" selected":""}>${esc(f.n)} — ${CATNAME[f.c]||f.c}</option>`).join("");
+  if(!pool.length)sel.innerHTML='<option value="">No font matches that</option>';
+  const note=document.getElementById('pickCount');
+  if(note){
+    const total=pickable().length,all=FONTS.filter(f=>f.src!=="curated").length;
+    note.textContent=total<all?`${total} of ${all} fonts — the rail filters this list`:`${all} fonts`;
+  }
+}
+function boardShown(){
+  if(!boardReady&&FONTS.length){fillFontSelect("");boardReady=true;}
+  renderBoard();syncInspector();
+}
+function setGround(g,quiet){
+  document.getElementById('canvasWrap').dataset.ground=g;
+  document.querySelectorAll('[data-ground]').forEach(el=>{
+    if(el.tagName==="BUTTON")el.setAttribute('aria-pressed',String(el.dataset.ground===g));
+  });
+  if(!quiet)saveBoard();
+}
+
+on('bAdd','click',()=>addBlock({text:"Typeface",font:(get(selId)||{}).font||(FONTS[0]||{}).n}));
+on('bDup','click',()=>{
+  const b=get(selId);if(!b)return;
+  const c=Object.assign({},b,{id:"b"+(bSeq++),x:b.x+28,y:b.y+Math.round(b.size*(b.lh||1.2))+30});
+  blocks.push(c);drawBlock(c);select(c.id);saveBoard();updateCount();
+});
+on('bCompare','click',()=>{
+  const b=get(selId);if(!b)return;
+  // same words, next font in the current list — the point is an honest A/B
+  const pool=(view.length?view:FONTS).filter(f=>f.src!=="curated");
+  const i=pool.findIndex(f=>f.n===b.font);
+  const next=pool[(i+1+pool.length)%pool.length]||pool[0];
+  if(!next)return;
+  const c=Object.assign({},b,{id:"b"+(bSeq++),font:next.n,
+    weight:nearest(weightsFor(next),b.weight),italic:b.italic&&!!next.i,
+    y:b.y+Math.round(b.size*(b.lh||1.2))+30});
+  blocks.push(c);drawBlock(c);select(c.id);scrollTo(c);saveBoard();updateCount();
+});
+on('bSet','click',()=>{
+  const pool=(view.length?view:FONTS).filter(f=>f.src!=="curated");
+  const pick=i=>pool[Math.min(i,pool.length-1)]||pool[0]||{n:"Archivo",w:[400],i:false};
+  const base=blocks.length?Math.max(...blocks.map(b=>b.y+b.size*1.6))+60:70;
+  const x=blocks.length?Math.min(...blocks.map(b=>b.x)):70;
+  const roles=[
+    {label:"Heading",text:"Heading in this face",size:64,weight:700,f:pick(0)},
+    {label:"Subhead",text:"A subhead, one step down",size:30,weight:500,f:pick(1)},
+    {label:"Body",text:"Body copy at a reading size, long enough to judge rhythm, spacing and how the face holds a line.",size:17,weight:400,f:pick(2)}
+  ];
+  let y=base;
+  roles.forEach(r=>{
+    const b=addBlock({font:r.f.n,text:r.text,size:r.size,
+      weight:nearest(weightsFor(r.f),r.weight),width:620,lh:r.size>40?1.1:1.5});
+    b.x=x;b.y=y;drawBlock(b);
+    y+=Math.round(r.size*(b.lh))+(r.size>40?34:26);
+  });
+  saveBoard();renderBoard();
+});
+on('bDel','click',()=>{if(selId)removeBlock(selId)});
+on('bClear','click',()=>{
+  if(!blocks.length)return;
+  blocks=[];select(null);renderBoard();saveBoard();
+});
+document.querySelectorAll('.boardbar [data-ground]').forEach(btn=>{
+  btn.addEventListener('click',()=>setGround(btn.dataset.ground));
+});
+document.getElementById('canvas').addEventListener('pointerdown',e=>{
+  if(e.target.id==="canvas"||e.target.id==="boardEmpty")select(null);
+});
+document.getElementById('canvas').addEventListener('dblclick',e=>{
+  if(e.target.id!=="canvas"&&e.target.id!=="boardEmpty")return;
+  const r=e.currentTarget.getBoundingClientRect();
+  const b=addBlock({text:"Typeface"});
+  b.x=Math.max(0,Math.round(e.clientX-r.left-8));
+  b.y=Math.max(0,Math.round(e.clientY-r.top-8));
+  drawBlock(b);saveBoard();
+});
+on('iFont','change',e=>{
+  const f=FONTS.find(x=>x.n===e.target.value);
+  if(!f)return;
+  patch(b=>{b.font=f.n;b.weight=nearest(weightsFor(f),b.weight);if(!f.i)b.italic=false;});
+  syncInspector();
+});
+on('iFontQ','input',e=>fillFontSelect(e.target.value));
+on('iSize','input',e=>patch(b=>b.size=Math.max(6,Math.min(400,+e.target.value||6))));
+on('iWeight','change',e=>patch(b=>b.weight=+e.target.value));
+on('iItal','change',e=>patch(b=>b.italic=e.target.checked));
+on('iLS','input',e=>patch(b=>b.ls=+e.target.value||0));
+on('iLH','input',e=>patch(b=>b.lh=+e.target.value||1.2));
+on('iAlign','change',e=>patch(b=>b.align=e.target.value));
+on('iColor','input',e=>patch(b=>b.color=e.target.value));
+
+document.addEventListener('keydown',e=>{
+  if(tab!=="board"||!selId)return;
+  const t=e.target;
+  if(t&&(t.tagName==="INPUT"||t.tagName==="SELECT"||t.isContentEditable))return;
+  if(e.key==="Delete"||e.key==="Backspace"){e.preventDefault();removeBlock(selId);}
+  if(e.key==="Escape")select(null);
+  const step=e.shiftKey?10:1;
+  const map={ArrowLeft:[-step,0],ArrowRight:[step,0],ArrowUp:[0,-step],ArrowDown:[0,step]};
+  if(map[e.key]){e.preventDefault();patch(b=>{b.x=Math.max(0,b.x+map[e.key][0]);b.y=Math.max(0,b.y+map[e.key][1]);});}
+});
+loadBoard();
 
 /* ================= local folder ================= */
 const SCRIPT_PROBE=[["latin",0x41],["latin-ext",0x0100],["vietnamese",0x01A0],["cyrillic",0x0410],["greek",0x0391],
@@ -907,4 +1397,5 @@ Promise.all([fetch('fonts.json').then(r=>r.json()),fetch('curated.json').then(r=
 .catch(()=>{list.innerHTML='<div class="empty"><strong>Font data did not load</strong>fonts.json and curated.json need to sit next to this page.</div>';});
 </script>
 
-</body></html>
+</body>
+</html>
