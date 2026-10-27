@@ -80,6 +80,9 @@ a{color:var(--accent)}
   backdrop-filter:var(--blur);-webkit-backdrop-filter:var(--blur);
   border-bottom:1px solid var(--line);
 }
+/* the toolbar sits above the panes below it, so its menus are not covered */
+.panel{position:relative;z-index:20}
+#boardMain,#browseMain{position:relative;z-index:1}
 .bar{position:sticky;top:env(safe-area-inset-top,0px);z-index:30;box-shadow:var(--shadow-sm)}
 .bar::after{content:"";position:absolute;inset:0 0 auto;height:1px;background:var(--gloss)}
 .bar-in{display:flex;align-items:center;gap:14px;padding-block:13px;flex-wrap:wrap}
@@ -266,6 +269,42 @@ input[type=checkbox]{accent-color:var(--accent);width:16px;height:16px}
 .boardempty kbd{font-family:var(--font-mono);font-size:11px;background:var(--chip);border:1px solid var(--line);
   border-radius:4px;padding:1px 5px}
 
+/* ---- pages ---- */
+.pagesrow{display:flex;gap:8px;align-items:center;flex-wrap:wrap;padding-bottom:12px}
+.pages{display:flex;gap:4px;align-items:center;flex-wrap:wrap;background:var(--chip);padding:4px;
+  border-radius:14px;border:1px solid var(--line)}
+.pg{display:inline-flex;align-items:center;gap:7px;border:none;background:none;padding:6px 12px;
+  border-radius:10px;font-size:12.5px;font-weight:600;cursor:pointer;color:var(--muted);transition:.14s;
+  font-family:inherit;max-width:190px}
+.pg:hover{color:var(--fg)}
+.pg[aria-selected="true"]{background:var(--surface);color:var(--fg);box-shadow:var(--shadow-sm)}
+.pg .nm{outline:none;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.pg .ct{font-family:var(--font-mono);font-size:10px;opacity:.6}
+.pg .x{opacity:0;border:none;background:none;color:inherit;cursor:pointer;font-size:13px;line-height:1;
+  padding:0 1px;border-radius:4px}
+.pg[aria-selected="true"] .x{opacity:.5}
+.pg .x:hover{opacity:1;color:hsl(356 72% 52%)}
+.pgadd{border:1px dashed var(--line);background:none;color:var(--accent);width:30px;height:30px;
+  border-radius:10px;cursor:pointer;font-size:15px;line-height:1;font-weight:700}
+.pgadd:hover{border-style:solid;background:var(--accent-soft)}
+
+/* ---- export / import ---- */
+.menuwrap{position:relative;display:inline-flex}
+.menu{position:absolute;z-index:25;top:calc(100% + 6px);left:0;min-width:248px;
+  background:var(--surface-2);backdrop-filter:var(--blur);-webkit-backdrop-filter:var(--blur);
+  border:1px solid var(--line);border-radius:14px;box-shadow:var(--shadow);overflow:hidden;padding:5px}
+.menu button{display:block;width:100%;text-align:left;border:none;background:none;color:var(--fg);
+  padding:9px 12px;border-radius:9px;font-size:13px;cursor:pointer;font-family:inherit}
+.menu button:hover:not(:disabled){background:var(--accent-soft);color:var(--accent)}
+.menu button:disabled{opacity:.4;cursor:default}
+.menu .mh{font-size:10px;text-transform:uppercase;letter-spacing:.09em;color:var(--muted);
+  font-weight:700;padding:8px 12px 5px}
+.menu .sub{display:block;font-size:11px;color:var(--muted);font-weight:400;margin-top:1px}
+.menu button:hover:not(:disabled) .sub{color:inherit;opacity:.8}
+.askbar{display:flex;gap:9px;align-items:center;flex-wrap:wrap;padding:11px 15px;margin-bottom:12px;
+  border:1px solid var(--accent);border-radius:14px;background:var(--accent-soft);font-size:13px}
+.askbar .grow{flex:1 1 220px;min-width:0}
+
 /* ---- inspector ---- */
 .inspector{display:flex;gap:9px;align-items:center;flex-wrap:wrap;padding:13px 15px;border:1px solid var(--line);
   border-radius:16px;background:var(--surface);backdrop-filter:var(--blur);-webkit-backdrop-filter:var(--blur);
@@ -417,14 +456,38 @@ input[type=checkbox]{accent-color:var(--accent);width:16px;height:16px}
     <button class="mini" data-ground="light" aria-pressed="false">Light</button>
     <button class="mini" data-ground="dark" aria-pressed="false">Dark</button>
     <span class="sep"></span>
-    <button class="mini" id="bClear">Clear board</button>
+    <span class="menuwrap">
+      <button class="mini" id="bExport">Export…</button>
+      <div class="menu" id="exportMenu" hidden>
+        <div class="mh">Save as a file</div>
+        <button data-scope="all">Everything<span class="sub">All pages, as one file</span></button>
+        <button data-scope="page">This page only<span class="sub">The board you are looking at</span></button>
+        <button data-scope="sel" id="expSel">Just the selection<span class="sub">The blocks you have selected</span></button>
+        <div class="mh">If the download is blocked</div>
+        <button data-scope="copy">Copy everything to the clipboard<span class="sub">Paste it into a file yourself</span></button>
+      </div>
+    </span>
+    <button class="mini" id="bImport">Open a file…</button>
+    <input type="file" id="docInput" accept=".tfboard,.json,application/json" hidden>
+    <button class="mini" id="bClear">Clear page</button>
     <span class="bar-count" id="bCount"></span>
+  </div>
+  <div class="wrap pagesrow">
+    <label style="font-size:10px;text-transform:uppercase;letter-spacing:.09em;color:var(--muted);font-weight:700">Pages</label>
+    <div class="pages" id="pages"></div>
+    <button class="pgadd" id="pgAdd" title="Add a page">+</button>
   </div>
 </section>
 
 <main class="wrap cols" id="boardMain" hidden>
   <div id="boardRail"></div>
   <section>
+  <div class="askbar" id="askBar" hidden>
+    <span class="grow" id="askText"></span>
+    <button class="btn" id="askReplace">Replace everything</button>
+    <button class="mini" id="askAdd">Add as new pages</button>
+    <button class="mini" id="askCancel">Cancel</button>
+  </div>
   <div class="inspector" id="insp">
     <div class="f"><label>Font</label>
       <button class="fontbtn" id="iFontBtn" disabled>Select a block<span class="caret">▼</span></button></div>
@@ -460,7 +523,7 @@ input[type=checkbox]{accent-color:var(--accent);width:16px;height:16px}
       <button id="zFit" title="Fit everything on screen">⤢</button>
     </div>
   </div>
-  <p class="note" id="boardNote">Boards are kept in this browser only — they are not uploaded, and they will not appear on another device.</p>
+  <p class="note" id="boardNote">Pages are kept in this browser only. Use <b>Export</b> to save them as a file you can keep, reopen later, or send to someone else to open here.</p>
   </section>
 </main>
 
@@ -970,31 +1033,262 @@ let z=1,px=60,py=50,spaceDown=false;
 const wrapEl=()=>document.getElementById('canvasWrap');
 const canvasEl=()=>document.getElementById('canvas');
 
-/* ---------- persistence ---------- */
-function loadBoard(){
-  try{
-    const raw=localStorage.getItem(BOARD_KEY);
-    if(raw){
-      const d=JSON.parse(raw);
-      if(Array.isArray(d.blocks))blocks=d.blocks;
-      if(Array.isArray(d.frames))frames=d.frames;
-      if(d.view){z=d.view.z||1;px=d.view.px||60;py=d.view.py||50;}
-      if(d.ground)setGround(d.ground,true);
-    }
-  }catch(_){}
-  const num=v=>+String(v).replace(/\D/g,"")||0;
-  blocks.forEach(b=>{bSeq=Math.max(bSeq,num(b.id)+1)});
-  frames.forEach(f=>{fSeq=Math.max(fSeq,num(f.id)+1)});
-  tabCount();
+/* ---------- document: several pages, one autosaved record ---------- */
+const FILE_FORMAT="typeface-index-board";
+let doc={v:2,boards:[],active:0};
+
+function blankBoard(name){
+  return {id:"p"+Date.now().toString(36)+Math.random().toString(36).slice(2,6),
+          name:name||"Page 1",ground:"auto",view:{z:1,px:60,py:50},
+          blocks:[],frames:[],bSeq:1,fSeq:1};
 }
-function saveBoard(){
-  try{localStorage.setItem(BOARD_KEY,JSON.stringify({
-    blocks,frames,view:{z,px,py},ground:wrapEl().dataset.ground}));}catch(_){}
+function B(){return doc.boards[doc.active]}
+/* the live arrays are the active page's; write them back before switching */
+function commit(){
+  const b=B();if(!b)return;
+  b.blocks=blocks;b.frames=frames;b.bSeq=bSeq;b.fSeq=fSeq;
+  b.view={z,px,py};
+  const w=wrapEl();if(w)b.ground=w.dataset.ground||"auto";
+}
+function adopt(){
+  const b=B();if(!b)return;
+  blocks=b.blocks;frames=b.frames;bSeq=b.bSeq||1;fSeq=b.fSeq||1;
+  z=b.view?.z||1;px=b.view?.px??60;py=b.view?.py??50;
+  picked.clear();
+  setGround(b.ground||"auto",true);
+  canvasEl().innerHTML="";
+  applyView();render();syncInspector();renderPages();
+}
+function activate(i){
+  if(i===doc.active||i<0||i>=doc.boards.length)return;
+  commit();doc.active=i;adopt();saveDoc();
+}
+function addPage(board){
+  commit();
+  doc.boards.push(board||blankBoard("Page "+(doc.boards.length+1)));
+  doc.active=doc.boards.length-1;adopt();saveDoc();
+}
+function removePage(i){
+  if(doc.boards.length<2)return;
+  commit();
+  doc.boards.splice(i,1);
+  doc.active=Math.min(doc.active>=i?doc.active-1:doc.active,doc.boards.length-1);
+  if(doc.active<0)doc.active=0;
+  adopt();saveDoc();
+}
+function renderPages(){
+  const host=document.getElementById('pages');if(!host)return;
+  host.innerHTML="";
+  doc.boards.forEach((b,i)=>{
+    const el=document.createElement('button');
+    el.className="pg";el.setAttribute('aria-selected',String(i===doc.active));
+    el.innerHTML=`<span class="nm">${esc(b.name)}</span>`+
+      `<span class="ct">${b.blocks.length||""}</span>`+
+      (doc.boards.length>1?`<span class="x" title="Delete this page">×</span>`:"");
+    el.addEventListener('click',e=>{
+      if(e.target.classList.contains('x')){e.stopPropagation();removePage(i);return;}
+      activate(i);
+    });
+    el.addEventListener('dblclick',e=>{
+      e.preventDefault();
+      const nm=el.querySelector('.nm');
+      nm.contentEditable="true";nm.focus();
+      const r=document.createRange();r.selectNodeContents(nm);
+      const w=window.getSelection();if(w){w.removeAllRanges();w.addRange(r);}
+    });
+    const nm=el.querySelector('.nm');
+    nm.addEventListener('blur',()=>{
+      if(!nm.isContentEditable)return;
+      nm.contentEditable="false";
+      doc.boards[i].name=nm.textContent.trim()||doc.boards[i].name;
+      nm.textContent=doc.boards[i].name;saveDoc();
+    });
+    nm.addEventListener('keydown',e=>{
+      e.stopPropagation();
+      if(e.key==="Enter"||e.key==="Escape"){e.preventDefault();nm.blur();}
+    });
+    host.appendChild(el);
+  });
+}
+function loadDoc(){
+  let raw=null;
+  try{raw=localStorage.getItem(BOARD_KEY)}catch(_){}
+  if(raw){
+    try{
+      const d=JSON.parse(raw);
+      if(Array.isArray(d.boards)&&d.boards.length){
+        doc={v:2,boards:d.boards,active:Math.min(d.active||0,d.boards.length-1)};
+      }else if(Array.isArray(d.blocks)){
+        // a board saved before pages existed becomes the first page
+        const b=blankBoard("Page 1");
+        b.blocks=d.blocks;b.frames=d.frames||[];
+        b.view=d.view||b.view;b.ground=d.ground||"auto";
+        doc={v:2,boards:[b],active:0};
+      }
+    }catch(_){}
+  }
+  if(!doc.boards.length)doc.boards=[blankBoard("Page 1")];
+  doc.boards.forEach(b=>{
+    const num=v=>+String(v).replace(/\D/g,"")||0;
+    b.blocks=b.blocks||[];b.frames=b.frames||[];
+    b.bSeq=Math.max(b.bSeq||1,...b.blocks.map(x=>num(x.id)+1),1);
+    b.fSeq=Math.max(b.fSeq||1,...b.frames.map(x=>num(x.id)+1),1);
+    b.view=b.view||{z:1,px:60,py:50};
+  });
+  const b=B();
+  blocks=b.blocks;frames=b.frames;bSeq=b.bSeq;fSeq=b.fSeq;
+  z=b.view.z||1;px=b.view.px??60;py=b.view.py??50;
+  setGround(b.ground||"auto",true);
+  renderPages();tabCount();
+}
+function saveDoc(){
+  commit();
+  try{localStorage.setItem(BOARD_KEY,JSON.stringify(doc))}catch(_){}
+  const host=document.getElementById('pages');
+  if(host&&!host.contains(document.activeElement))renderPages();
 }
 function tabCount(){
   const t=document.querySelector('[data-tab="board"]');
-  if(t)t.textContent=blocks.length?"Moodboard ("+blocks.length+")":"Moodboard";
+  if(!t)return;
+  const total=doc.boards.reduce((n,b)=>n+(b.blocks?b.blocks.length:0),0);
+  t.textContent=total?"Moodboard ("+total+")":"Moodboard";
 }
+
+/* ---------- export and import ---------- */
+function usedFonts(boardList){
+  const names=new Set();
+  boardList.forEach(b=>b.blocks.forEach(bl=>names.add(bl.font)));
+  return [...names].map(n=>{
+    const f=FONTS.find(x=>x.n===n);
+    return f?{n:f.n,c:f.c,w:f.w,i:!!f.i,v:f.v||[],s:f.s||["latin"],src:f.src}:{n};
+  });
+}
+function buildFile(boardList,label){
+  return JSON.stringify({
+    format:FILE_FORMAT,version:2,
+    title:label||"Typeface Index board",
+    exported:new Date().toISOString(),
+    boards:boardList,
+    fonts:usedFonts(boardList)
+  },null,1);
+}
+function cleanBoard(b){
+  return {id:b.id,name:b.name,ground:b.ground||"auto",view:b.view||{z:1,px:60,py:50},
+          blocks:b.blocks,frames:b.frames,bSeq:b.bSeq,fSeq:b.fSeq};
+}
+function exportScope(scope){
+  commit();
+  if(scope==="page")return [cleanBoard(B())];
+  if(scope==="sel"){
+    const ids=[...picked].filter(get);
+    if(!ids.length)return null;
+    const keep=blocks.filter(b=>ids.includes(b.id));
+    const fr=frames.filter(f=>f.members.some(m=>ids.includes(m)))
+                   .map(f=>({...f,members:f.members.filter(m=>ids.includes(m))}))
+                   .filter(f=>f.members.length>1);
+    const b=blankBoard(B().name+" — selection");
+    b.blocks=keep;b.frames=fr;b.ground=B().ground;
+    return [cleanBoard(b)];
+  }
+  return doc.boards.map(cleanBoard);
+}
+function slugName(t){return (t||"board").toLowerCase().replace(/[^a-z0-9]+/g,"-").replace(/^-|-$/g,"")||"board"}
+/* Two routes out. On a normal web host a blob link saves the file. Inside the
+   claude.ai viewer that link is inert, so the downloads capability handles it;
+   it resolves null anywhere else, which is why the link stays as the fallback. */
+let dlCap=null;
+(async()=>{try{dlCap=await (window.claude&&window.claude.use?window.claude.use("downloads"):null)}catch(_){dlCap=null}})();
+async function download(filename,text){
+  if(dlCap){
+    try{await dlCap.save({filename,data:text});return true;}
+    catch(err){if(err&&err.code==="cancelled")return false;}
+  }
+  try{
+    const blob=new Blob([text],{type:"application/json"});
+    const url=URL.createObjectURL(blob);
+    const a=document.createElement('a');
+    a.href=url;a.download=filename;a.style.display="none";
+    document.body.appendChild(a);a.click();a.remove();
+    setTimeout(()=>URL.revokeObjectURL(url),2000);
+    return true;
+  }catch(_){return false}
+}
+async function doExport(scope){
+  closeMenu();
+  if(scope==="copy"){
+    const text=buildFile(doc.boards.map(cleanBoard));
+    const say=ok=>boardSay(ok?"Copied. Paste it into a text file and save it as .tfboard":
+      "The clipboard refused. Open the browser console if you need the text another way.");
+    try{navigator.clipboard.writeText(text).then(()=>say(true),()=>say(false))}catch(_){say(false)}
+    return;
+  }
+  const list=exportScope(scope);
+  if(!list){boardSay("Select some blocks first, then export the selection.");return;}
+  const n=list.reduce((a,b)=>a+b.blocks.length,0);
+  if(!n){boardSay("There is nothing on this page to export yet.");return;}
+  const name=slugName(scope==="all"?"typeface-boards":list[0].name)+".tfboard";
+  boardSay(`Saving ${n} block${n>1?"s":""} as ${name}…`);
+  const ok=await download(name,buildFile(list,list[0].name));
+  boardSay(ok?`Saved ${n} block${n>1?"s":""} as ${name}. Open it here again, or send it to someone to open on this site.`
+            :`The save was declined. You can still use “Copy everything to the clipboard”.`);
+}
+function boardSay(msg){
+  const el=document.getElementById('boardNote');
+  if(!el)return;
+  el.innerHTML=esc(msg);
+  clearTimeout(boardSay._t);
+  boardSay._t=setTimeout(()=>{
+    el.innerHTML='Pages are kept in this browser only. Use <b>Export</b> to save them as a file you can keep, reopen later, or send to someone else to open here.';
+  },9000);
+}
+let pendingImport=null;
+function readFile(file){
+  file.text().then(txt=>{
+    let d;
+    try{d=JSON.parse(txt)}catch(_){boardSay("That file is not readable as a board.");return;}
+    if(!d||d.format!==FILE_FORMAT||!Array.isArray(d.boards)){
+      boardSay("That file was not made by this page, so it cannot be opened here.");return;
+    }
+    const n=d.boards.reduce((a,b)=>a+((b.blocks||[]).length),0);
+    if(!n){boardSay("That file has no blocks in it.");return;}
+    pendingImport=d;
+    document.getElementById('askText').innerHTML=
+      `<b>${esc(file.name)}</b> holds ${d.boards.length} page${d.boards.length>1?"s":""} and ${n} block${n>1?"s":""}.`;
+    document.getElementById('askBar').hidden=false;
+  }).catch(()=>boardSay("That file could not be read."));
+}
+function adoptFonts(d){
+  let missing=0;
+  (d.fonts||[]).forEach(f=>{
+    if(!f.n||FONTS.some(x=>x.n===f.n))return;
+    if(f.src==="local")missing++;
+    FONTS.push({n:f.n,id:f.n.toLowerCase().replace(/[^a-z0-9]+/g,"-"),
+      c:f.c||"sans-serif",s:f.s||["latin"],w:f.w||[400],i:!!f.i,v:f.v||[],d:"",
+      src:"google",imported:true});
+  });
+  return missing;
+}
+function applyImport(mode){
+  const d=pendingImport;if(!d)return;
+  document.getElementById('askBar').hidden=true;pendingImport=null;
+  const missing=adoptFonts(d);
+  const incoming=d.boards.map(b=>{
+    const nb=blankBoard(b.name||"Imported page");
+    nb.blocks=b.blocks||[];nb.frames=b.frames||[];
+    nb.ground=b.ground||"auto";nb.view=b.view||{z:1,px:60,py:50};
+    nb.bSeq=(b.bSeq||nb.blocks.length)+1;nb.fSeq=(b.fSeq||nb.frames.length)+1;
+    return nb;
+  });
+  commit();
+  if(mode==="replace")doc={v:2,boards:incoming,active:0};
+  else{doc.boards=doc.boards.concat(incoming);doc.active=doc.boards.length-incoming.length;}
+  adopt();saveDoc();
+  requestAnimationFrame(()=>{refreshFrames();fitView();});
+  const n=incoming.reduce((a,b)=>a+b.blocks.length,0);
+  boardSay(`Opened ${n} block${n>1?"s":""} across ${incoming.length} page${incoming.length>1?"s":""}.`+
+    (missing?` ${missing} typeface${missing>1?"s were":" was"} loaded from someone's own disk, so ${missing>1?"they":"it"} will fall back here.`:""));
+}
+function closeMenu(){document.getElementById('exportMenu').hidden=true}
 
 /* ---------- model ---------- */
 function defaults(){return {size:56,weight:400,italic:false,ls:0,lh:1.2,align:"left",color:"",width:0,role:""};}
@@ -1020,7 +1314,7 @@ function addBlock(opts){
   }
   blocks.push(b);
   if(tab==="board"){render();selectOnly(b.id);focusOn(b);}
-  saveBoard();updateCount();
+  saveDoc();updateCount();
   return b;
 }
 function removeSelected(){
@@ -1031,7 +1325,7 @@ function removeSelected(){
   frames.forEach(f=>{f.members=f.members.filter(m=>!picked.has(m))});
   frames=frames.filter(f=>!picked.has(f.id)&&f.members.length>0);
   ids.forEach(id=>{const e=document.getElementById(id);if(e)e.remove()});
-  picked.clear();render();saveBoard();updateCount();syncInspector();
+  picked.clear();render();saveDoc();updateCount();syncInspector();
 }
 
 /* ---------- view transform ---------- */
@@ -1056,7 +1350,7 @@ function zoomAt(factor,cx,cy){
   if(nz===z)return;
   px=cx-(cx-px)*(nz/z);
   py=cy-(cy-py)*(nz/z);
-  z=nz;applyView();saveBoard();
+  z=nz;applyView();saveDoc();
 }
 function contentBounds(){
   if(!blocks.length)return null;
@@ -1075,7 +1369,7 @@ function fitView(){
   z=Math.min(MAX_Z,Math.max(MIN_Z,Math.min(w/(b.x1-b.x0),h/(b.y1-b.y0),1.6)));
   px=30+(w-(b.x1-b.x0)*z)/2-b.x0*z;
   py=30+(h-(b.y1-b.y0)*z)/2-b.y0*z;
-  applyView();saveBoard();
+  applyView();saveDoc();
 }
 function focusOn(b){
   const r=wrapEl();
@@ -1083,7 +1377,7 @@ function focusOn(b){
   if(sx<40||sy<40||sx>r.clientWidth-60||sy>r.clientHeight-60){
     px=r.clientWidth/2-b.x*z;
     py=r.clientHeight/3-b.y*z;
-    applyView();saveBoard();
+    applyView();saveDoc();
   }
 }
 
@@ -1221,7 +1515,7 @@ function wireBlock(el){
     if(!mode)return;
     const was=armed;mode=null;armed=false;el.classList.remove('drag');
     try{el.releasePointerCapture(e.pointerId)}catch(_){}
-    if(was){saveBoard();syncInspector();}
+    if(was){saveDoc();syncInspector();}
   };
   el.addEventListener('pointerup',end);
   el.addEventListener('pointercancel',end);
@@ -1242,7 +1536,7 @@ function wireBlock(el){
     if(!el.classList.contains('editing'))return;
     const b=get(el.id);
     el.classList.remove('editing');txt.contentEditable="false";
-    if(b){b.text=txt.textContent.replace(/\n+$/,"")||" ";saveBoard();drawBlock(b);refreshFrames();}
+    if(b){b.text=txt.textContent.replace(/\n+$/,"")||" ";saveDoc();drawBlock(b);refreshFrames();}
   });
   txt.addEventListener('keydown',e=>{
     e.stopPropagation();
@@ -1286,7 +1580,7 @@ function wireFrame(el){
     if(!drag)return;
     const was=armed;drag=false;armed=false;
     try{nm.releasePointerCapture(e.pointerId)}catch(_){}
-    if(was)saveBoard();
+    if(was)saveDoc();
   };
   nm.addEventListener('pointerup',end);
   nm.addEventListener('pointercancel',end);
@@ -1300,7 +1594,7 @@ function wireFrame(el){
     if(!nm.isContentEditable)return;
     nm.contentEditable="false";
     const f=getFrame(el.id);
-    if(f){f.name=nm.textContent.trim()||f.name;nm.textContent=f.name;saveBoard();}
+    if(f){f.name=nm.textContent.trim()||f.name;nm.textContent=f.name;saveDoc();}
   });
   nm.addEventListener('keydown',e=>{
     e.stopPropagation();
@@ -1335,7 +1629,7 @@ function addClassTo(frameId){
     y:last.y+(lastEl?lastEl.offsetHeight:last.size*1.3)+34
   });
   f.members.push(b.id);
-  render();selectOnly(b.id);saveBoard();
+  render();selectOnly(b.id);saveDoc();
 }
 
 /* ---------- pan, zoom, marquee ---------- */
@@ -1352,7 +1646,7 @@ function wireCanvas(){
       // trackpads send both axes; a mouse wheel with shift pans sideways
       px-=e.shiftKey?e.deltaY:e.deltaX;
       py-=e.shiftKey?0:e.deltaY;
-      applyView();saveBoard();
+      applyView();saveDoc();
     }
   },{passive:false});
 
@@ -1396,7 +1690,7 @@ function wireCanvas(){
   });
 
   const stop=e=>{
-    if(pan){pan=null;wrap.classList.remove('panning');saveBoard();}
+    if(pan){pan=null;wrap.classList.remove('panning');saveDoc();}
     if(marq){marq=null;if(marqEl){marqEl.remove();marqEl=null;}}
     try{wrap.releasePointerCapture(e.pointerId)}catch(_){}
   };
@@ -1456,7 +1750,7 @@ function patch(fn){
   const ids=[...picked].filter(get);
   if(!ids.length)return;
   ids.forEach(id=>{const b=get(id);fn(b);drawBlock(b)});
-  refreshFrames();saveBoard();
+  refreshFrames();saveDoc();
 }
 
 /* ---------- font picker, with a preview of every option ---------- */
@@ -1515,7 +1809,7 @@ function setGround(g,quiet){
   wrapEl().dataset.ground=g;
   document.querySelectorAll('.boardbar [data-ground]').forEach(el=>
     el.setAttribute('aria-pressed',String(el.dataset.ground===g)));
-  if(!quiet)saveBoard();
+  if(!quiet)saveDoc();
 }
 
 /* ---------- toolbar ---------- */
@@ -1526,7 +1820,7 @@ on('bDup','click',()=>{
   const c=Object.assign({},b,{id:"b"+(bSeq++),x:b.x+26,y:b.y+(el?el.offsetHeight:b.size*1.3)+26});
   blocks.push(c);
   const f=frameOf(b.id);if(f)f.members.push(c.id);
-  render();selectOnly(c.id);saveBoard();
+  render();selectOnly(c.id);saveDoc();
 });
 on('bCompare','click',()=>{
   const b=soleBlock();if(!b)return;
@@ -1540,7 +1834,7 @@ on('bCompare','click',()=>{
     y:b.y+(el?el.offsetHeight:b.size*1.3)+26});
   blocks.push(c);
   const f=frameOf(b.id);if(f)f.members.push(c.id);
-  render();selectOnly(c.id);focusOn(c);saveBoard();
+  render();selectOnly(c.id);focusOn(c);saveDoc();
 });
 on('bGroup','click',()=>{
   const ids=[...picked].filter(get);
@@ -1549,7 +1843,7 @@ on('bGroup','click',()=>{
   frames.forEach(f=>{f.members=f.members.filter(m=>!ids.includes(m))});
   frames=frames.filter(f=>f.members.length>0);
   frames.push({id:"f"+(fSeq++),name:"Set "+fSeq,members:ids});
-  render();saveBoard();
+  render();saveDoc();
 });
 on('bUngroup','click',()=>{
   const hit=new Set();
@@ -1561,7 +1855,7 @@ on('bUngroup','click',()=>{
   hit.forEach(id=>{const e=document.getElementById(id);if(e)e.remove()});
   frames=frames.filter(f=>!hit.has(f.id));
   picked=new Set([...picked].filter(get));
-  render();afterSelect();saveBoard();
+  render();afterSelect();saveDoc();
 });
 on('bSet','click',()=>{
   const pool=pickable();
@@ -1584,7 +1878,7 @@ on('bSet','click',()=>{
   });
   frames.push({id:"f"+(fSeq++),name:"Set "+fSeq,members:made});
   picked=new Set(made);
-  render();afterSelect();saveBoard();
+  render();afterSelect();saveDoc();
   requestAnimationFrame(()=>{refreshFrames();fitView();});
 });
 on('bDel','click',removeSelected);
@@ -1592,7 +1886,15 @@ on('bClear','click',()=>{
   if(!blocks.length&&!frames.length)return;
   blocks=[];frames=[];picked.clear();
   canvasEl().innerHTML="";
-  render();syncInspector();saveBoard();
+  render();syncInspector();saveDoc();
+});
+/* a board file dropped on the canvas opens like any other */
+wrapEl().addEventListener('dragover',e=>{e.preventDefault()});
+wrapEl().addEventListener('drop',e=>{
+  const f=[...(e.dataTransfer.files||[])].find(x=>/\.(tfboard|json)$/i.test(x.name));
+  if(!f)return;
+  e.preventDefault();e.stopPropagation();
+  readFile(f);
 });
 document.querySelectorAll('.boardbar [data-ground]').forEach(btn=>{
   btn.addEventListener('click',()=>setGround(btn.dataset.ground));
@@ -1636,7 +1938,35 @@ document.addEventListener('keydown',e=>{
   const map={ArrowLeft:[-step,0],ArrowRight:[step,0],ArrowUp:[0,-step],ArrowDown:[0,step]};
   if(map[e.key]){e.preventDefault();patch(b=>{b.x+=map[e.key][0];b.y+=map[e.key][1];});}
 });
-loadBoard();wireCanvas();
+loadDoc();wireCanvas();
+
+/* ---------- pages, export, import ---------- */
+on('pgAdd','click',()=>addPage());
+on('bExport','click',e=>{
+  e.stopPropagation();
+  const m=document.getElementById('exportMenu');
+  document.getElementById('expSel').disabled=![...picked].filter(get).length;
+  m.hidden=!m.hidden;
+});
+document.getElementById('exportMenu').addEventListener('click',e=>{
+  const b=e.target.closest('button[data-scope]');
+  if(b&&!b.disabled)doExport(b.dataset.scope);
+});
+document.addEventListener('click',e=>{
+  const m=document.getElementById('exportMenu');
+  if(!m.hidden&&!m.contains(e.target)&&e.target.id!=="bExport")closeMenu();
+});
+on('bImport','click',()=>document.getElementById('docInput').click());
+on('docInput','change',e=>{
+  const f=e.target.files[0];
+  if(f)readFile(f);
+  e.target.value="";
+});
+on('askReplace','click',()=>applyImport('replace'));
+on('askAdd','click',()=>applyImport('add'));
+on('askCancel','click',()=>{
+  pendingImport=null;document.getElementById('askBar').hidden=true;
+});
 
 /* ================= local folder ================= */
 const SCRIPT_PROBE=[["latin",0x41],["latin-ext",0x0100],["vietnamese",0x01A0],["cyrillic",0x0410],["greek",0x0391],
